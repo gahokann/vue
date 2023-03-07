@@ -4,7 +4,9 @@
             <div class="sidebar__info__item_one">
                 <h1 class="sidebar__info__title">ПСК</h1>
                 <div class="logo">
-                    <img src="../assets/img/1.jpg" alt="" class="sidebar__info__logo">
+                    <router-link :to="{ name: 'mainProfile' }" class="">
+                        <img src="../assets/img/1.jpg" alt="" class="sidebar__info__logo">
+                    </router-link>
                     <button class="sidebar__info__logout">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M15 5.25C15 5.05109 14.921 4.86032 14.7803 4.71967C14.6397 4.57902 14.4489 4.5 14.25 4.5H2.25C2.05109 4.5 1.86032 4.57902 1.71967 4.71967C1.57902 4.86032 1.5 5.05109 1.5 5.25V18.75C1.5 18.9489 1.57902 19.1397 1.71967 19.2803C1.86032 19.421 2.05109 19.5 2.25 19.5H14.25C14.4489 19.5 14.6397 19.421 14.7803 19.2803C14.921 19.1397 15 18.9489 15 18.75V15.75C15 15.5511 15.079 15.3603 15.2197 15.2197C15.3603 15.079 15.5511 15 15.75 15C15.9489 15 16.1397 15.079 16.2803 15.2197C16.421 15.3603 16.5 15.5511 16.5 15.75V18.75C16.5 19.3467 16.2629 19.919 15.841 20.341C15.419 20.7629 14.8467 21 14.25 21H2.25C1.65326 21 1.08097 20.7629 0.65901 20.341C0.237053 19.919 0 19.3467 0 18.75L0 5.25C0 4.65326 0.237053 4.08097 0.65901 3.65901C1.08097 3.23705 1.65326 3 2.25 3H14.25C14.8467 3 15.419 3.23705 15.841 3.65901C16.2629 4.08097 16.5 4.65326 16.5 5.25V8.25C16.5 8.44891 16.421 8.63968 16.2803 8.78033C16.1397 8.92098 15.9489 9 15.75 9C15.5511 9 15.3603 8.92098 15.2197 8.78033C15.079 8.63968 15 8.44891 15 8.25V5.25Z" fill="#FF0000"/>
@@ -23,8 +25,12 @@
                 </div>
                 <div class="info__links">
                     <div class="info__links__title">Заказы</div>
-                    <a href="#" class="info__link">Активные заказы</a><br>
-                    <a href="#" class="info__link">Все</a>
+                    <router-link :to="{ name: 'activityOrderProfile' }" class="info__link">
+                    Активные заказы
+                    </router-link>
+                    <router-link :to="{ name: 'allOrderProfile' }" class="info__link">
+                    Все
+                    </router-link>
                 </div>
             </nav>
             <nav class="sidebar__info__item">
@@ -37,9 +43,15 @@
                 </div>
                 <div class="info__links">
                     <div class="info__links__title">Профиль</div>
-                    <a href="#" class="info__link">Главная</a><br>
-                    <a href="#" class="info__link">Настройки</a><br>
-                    <a href="#" class="info__link">Для компаний</a>
+                    <router-link :to="{ name: 'mainProfile' }" class="info__link">
+                    Главная
+                    </router-link><br>
+                    <router-link :to="{ name: 'settingsProfile' }" class="info__link">
+                    Настройки
+                    </router-link>
+                    <router-link :to="{ name: 'companyProfile' }" class="info__link">
+                    Для компаний
+                    </router-link>
                 </div>
             </nav>
         </div>            
