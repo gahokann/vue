@@ -17,6 +17,7 @@
     .footer.main > .container {
         column-gap: 50px;
     }
+
 }
 
 @media(max-width: 1024px) {
@@ -140,6 +141,11 @@
     .footer.main > .container {
         row-gap: 20px;
     }
+
+    .form__block {
+        margin-top: 40px;
+    }
+
 }
 
 @media(max-width: 530px) {

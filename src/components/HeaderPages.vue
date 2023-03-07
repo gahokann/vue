@@ -15,7 +15,7 @@
                 <router-link :to="{ name: 'main' }" class="header__nav__link">
                 Главная
                 </router-link>
-                <router-link :to="{ name: 'main' }" class="header__nav__link">
+                <router-link :to="{ name: 'partners' }" class="header__nav__link">
                 Партнеры
                 </router-link>
                 <router-link :to="{ name: 'main' }" class="header__nav__link">
