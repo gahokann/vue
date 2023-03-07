@@ -11,7 +11,7 @@
                 <label for="password" class="form__label">Пароль</label>
                 <input type="password" id="password" class="form__input" placeholder="123456789...">
                 <p class="form__input-comment">Длина пароля от 8 символов</p>
-                
+                s
                 <button class="btn btn-orange auth__btn">Авторизация</button>
             </form>
             <div class="form__links">
