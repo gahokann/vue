@@ -5,9 +5,6 @@ import router from './router/index'
 
 Vue.use(VueRouter)
 
-import jQuery from 'jquery'
-window.$ = window.jQuery = jQuery
-
 import '@/assets/css/style.css'
 import '@/assets/css/media.css'
 

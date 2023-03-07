@@ -44,11 +44,15 @@ p {
 !========== HEADER =========== */
 
 .header {
+    padding: 20px 0;
+}
+
+.header__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
     background-color: #fff;
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);
 }
 
 
@@ -122,6 +126,8 @@ p {
     color: #fff;
 }
 
+
+
 /* !=====================================================================
 !========== INTRO =========== */
 
@@ -153,61 +159,61 @@ p {
 }
 
 /* !=====================================================================
-!========== FOOTER =========== */
+!========== FOOTER MAIN =========== */
 
-.footer {
+.footer.main {
     width: 100%;
     background-color: #F88C21;
     padding: 20px;
     margin-top: auto;
 }
 
-.footer > .container {
+.footer.main > .container {
     transition: all .5s linear;
     display: flex;
     column-gap: 300px;
 }
 
-.footer__info {
+.footer__info.main {
     display: flex;
     flex-direction: column;
 }
 
-.footer__title {
+.footer__title.main {
     font-size: 24px;
     font-weight: 700;
     color: #fff;
     width: 350px;
 }
 
-.footer__mail,
-.footer__tel {
+.footer__mail.main,
+.footer__tel.main {
     color: #fff;
     font-size: 20px;
     padding-top: 8px;
 }
 
-.footer__tel {
+.footer__tel.main {
     padding-top: 4px;
 }
 
-.footer__copyright {
+.footer__copyright.main {
     color: #fff;
     padding-top: 35px;
 }
 
-.footer__nav {
+.footer__nav.main {
     display: flex;
     flex-direction: column;
 }
 
-.footer__nav__title {
+.footer__nav__title.main {
     color: #fff;
     font-size: 24px;
     font-weight: 700;
 }
 
-.footer__nav__link {
+.footer__nav__link.main {
     font-size: 20px;
     font-weight: 400;
     color: #fff;
@@ -215,6 +221,136 @@ p {
     margin-top: 18px;
 }
 
-.footer__nav__link:hover {
+.footer__nav__link.main:hover {
+    text-decoration: underline;
+}
+
+/* !AUTH PAGE */
+
+.form__block {
+    width: 510px;
+    background-color: #fff;
+    margin: 0 auto;
+    margin-top: 40px;
+    border-radius: 12px;
+    padding: 15px 38px;
+    margin-bottom: 40px;
+}
+
+.form__img {
+    margin: 0 auto;
+    display: block;
+}
+
+.form__title {
+    font-size: 24px;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.form {
+    margin-top: 50px;
+}
+
+.form__label {
+    font-size: 400px;
+    font-size: 16px;
+    color: #000;
+}
+
+.form__input {
+    display: block;
+    width: 100%;
+    height: 70px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    padding: 25px 17px;
+    outline: none;
+}
+
+
+.form__input:focus {
+    outline: none;
+}
+
+.form__input::placeholder {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form__label {
+    padding-top: 24px;
+    padding-bottom: 5px;
+}
+
+.form__label:first-child {
+    padding-top: 0;
+}
+
+.form__input-comment {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.50);
+    padding-top: 5px;
+}
+
+.auth__btn {
+    margin: 0 auto;
+    display: block;
+    margin-top: 40px;
+    padding: 15px 25px;
+}
+
+.form__links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 36px;
+}
+
+.form__link {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    text-decoration: none;
+}
+
+.form__links.regPage {
+    justify-content: center;
+}
+
+/* ! FOOTER ALL */
+
+.footer {
+    margin-top: auto;
+    width: 100%;
+    background-color: #F88C21;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #fff;
+}
+
+.footer__inner {
+    display: flex;
+    height: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__info__link {
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 28px;
+}
+
+.footer__info__link:first-child {
+    margin-left: 0;
+}
+
+.footer__info__link:hover {
     text-decoration: underline;
 }
