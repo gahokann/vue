@@ -8,10 +8,10 @@
                 </div>
             </router-link>
 
-            <div class="header__burger">
+            <div class="header__burger" :class="burgerMain" @click="burgerMain.active = !burgerMain.active">
                 <span></span>
             </div>
-            <nav class="header__nav">
+            <nav class="header__nav" :class="burgerMain">
                 <router-link :to="{ name: 'main' }" class="header__nav__link">
                 Главная
                 </router-link>
@@ -30,7 +30,13 @@
 </template>
 <script>
 export default {
-    
+    data() {
+        return {
+            burgerMain: {
+                active: false,
+            }
+        }
+    }
 }
 </script>
 <style lang="">

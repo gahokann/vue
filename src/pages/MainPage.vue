@@ -43,6 +43,7 @@ export default {
     components: {
         HeaderPages
     }
+    
 }
 </script>
 <style lang="">

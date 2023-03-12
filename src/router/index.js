@@ -4,6 +4,8 @@ import AuthPage from '../pages/AuthPage.vue'
 import RegPage from '../pages/RegPage.vue'
 import PartnersPage from '../pages/PartnersPage.vue'
 import ProfileDefaultPage from '../pages/profile/DefaultPage.vue'
+import ProfileIndexPage from '../pages/profile/IndexPage.vue'
+import ProfileSettingsPage from '../pages/profile/SettingsPage.vue'
 
 export default new VueRouter ({
     mode: 'history',
@@ -37,7 +39,16 @@ export default new VueRouter ({
             name: 'profile',
             component: ProfileDefaultPage,
             children: [
-                
+                {
+                    path: '/',
+                    name: 'profileMain',
+                    component: ProfileIndexPage,
+                },
+                {
+                    path: '/settings',
+                    name: 'profileSettings',
+                    component: ProfileSettingsPage,
+                },
             ]
         },
     ]
