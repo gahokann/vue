@@ -624,7 +624,7 @@ p {
 /* Todo: ============= */
 
 .index__profile {
-    padding: 80px;
+    padding: 50px;
 }
 
 .index__profile__items {
@@ -718,4 +718,47 @@ p {
 
 .table {
     vertical-align: middle;
+}
+
+.settings__items {
+    display: flex;
+    column-gap: 50px;
+    row-gap: 50px;
+    flex-wrap: wrap;
+}
+
+.settings__item {
+    width: 400px;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.settings__item__title {
+    font-weight: 500;
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+.settings__item__fio {
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.btn__change {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+
+}
+
+.form__input.change {
+    height: 0;
+}
+
+.form.settings {
+    margin-top: 10px;
+}
+
+.index__profile__orders.allOrderPage {
+    margin-top: 0;
 }

@@ -277,6 +277,22 @@
         margin-top: 40px;
     }
 
+    .index__profile__orders {
+        display: none;
+    }
+
+    .index__profile__items {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .index__profile__item {
+    }
+
+    .index__profile__name {
+        display: none;
+    }
+
 }
 
 @media(max-width: 530px) {
@@ -295,6 +311,34 @@
 
     .nav__profile__title {
         display: none;
+    }
+
+    .index__profile__dostup {
+        width: 100%;
+    }
+
+    .index__profile__item {
+        margin: 0 auto;
+    }
+
+    .index__profile__fio {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .index__profile__email, 
+    .index__profile__phone {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .index__profile__items {
+        margin-bottom: 70px;
+    }
+
+    .index__profile {
+        padding: 20px;
+        margin-bottom: 70px;
     }
 }
 
@@ -396,5 +440,12 @@
         padding-left: 15px;
     }
 
+    .form {
+        margin-top: 30px;
+    }
+
+    .form__title.company {
+        font-size: 20px;
+    }
 
 }
