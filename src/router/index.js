@@ -8,6 +8,8 @@ import ProfileIndexPage from '../pages/profile/IndexPage.vue'
 import ProfileSettingsPage from '../pages/profile/SettingsPage.vue'
 import ProfileCompanyPage from '../pages/profile/CompanyPage.vue'
 import ProfileAllOrderPage from '../pages/profile/AllOrderPage.vue'
+import ProfileActiveOrderPage from '../pages/profile/ActiveOrderPage.vue'
+import AdminUsers from '../pages/admin/UserPage.vue'
 
 export default new VueRouter ({
     mode: 'history',
@@ -61,6 +63,16 @@ export default new VueRouter ({
                     name: 'profileAllOrders',
                     component: ProfileAllOrderPage,
                 },
+                {
+                    path: '/activeOrders',
+                    name: 'profileActiveOrders',
+                    component: ProfileActiveOrderPage,
+                },
+                {
+                    path: '/admin/users',
+                    name: 'adminUsers',
+                    component: AdminUsers,
+                }
             ]
         },
     ]

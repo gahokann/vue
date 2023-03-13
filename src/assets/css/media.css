@@ -258,6 +258,34 @@
     .sidebar__profile__burger.mobile {
         display: none;
     }
+
+    .orderPageTable thead {
+        display: none;
+    }
+
+    .orderPageTable tr {
+        display: block;
+    }
+
+    .orderPageTable td {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+
+    .orderPageTable td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 20px;
+   }
+
+   .orderPageTable tr {
+        margin-bottom: 20px;
+   }
+
+   .index__profile__orders__info {
+        padding-bottom: 20px;
+   }
     
 
 }
@@ -277,9 +305,6 @@
         margin-top: 40px;
     }
 
-    .index__profile__orders {
-        display: none;
-    }
 
     .index__profile__items {
         display: block;
@@ -293,6 +318,40 @@
         display: none;
     }
 
+    .adminPageTable tr {
+        display: block;
+    }
+
+    .adminPageTable thead {
+        display: none;
+    }
+
+    .adminPageTable td {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+
+    .adminPageTable td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 20px;
+    }
+
+    .adminPageTable tr {
+        margin-bottom: 20px;
+    }
+
+}
+
+@media(max-width: 620px) {
+    .index__profile__orders__info {
+        display: block;
+    }
+
+    .index__profile__order__title {
+        margin-bottom: 20px;
+    }
 }
 
 @media(max-width: 530px) {
