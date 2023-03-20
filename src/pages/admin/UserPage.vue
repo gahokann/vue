@@ -22,6 +22,7 @@
                         <th scope="col">Почта</th>
                         <th scope="col">Номер телефона</th>
                         <th scope="col">Компания</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,7 @@
                         <td data-label="Почта">1@snab.ru</td>
                         <td data-label="Номер телефона">+79778598026</td>
                         <td data-label="Компания">ООО 'ПСК'</td>
+                        <td data-label=""><router-link :to="{name: 'adminClientPerson'}" class='btn btn-orange'>Открыть</router-link></td>
                     </tr>
                     
                 </tbody>

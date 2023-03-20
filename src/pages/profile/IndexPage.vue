@@ -20,7 +20,9 @@
         <div class="index__profile__orders">
             <div class="index__profile__orders__info">
                 <h3 class="index__profile__order__title">Активные заказы</h3>
-                <a href="#" class='btn btn-orange'>Сделать заказ</a>
+                <router-link :to="{ name: 'orderCreate' }" class="btn btn-orange">
+                Сделать заказ
+                </router-link>
             </div>
             <table class="table orderPageTable">
                 <thead>

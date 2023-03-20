@@ -13,7 +13,7 @@
                 <label for="portal" class="form__label">Интернет портал</label>
                 <input type="text" id="portal" class="form__input" placeholder="https://1snab.ru">
                 <p class="form__input-comment">Не обязательно</p>
-                <button class="btn btn-orange auth__btn">Авторизация</button>
+                <button class="btn btn-orange auth__btn">Подтвердить</button>
             </form>
         </div>
     </div>

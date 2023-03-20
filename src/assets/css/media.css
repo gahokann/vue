@@ -18,6 +18,72 @@
         column-gap: 50px;
     }
 
+    .PartnerPageTable thead {
+        display: none;
+    }
+
+    .PartnerPageTable tr {
+        display: block;
+    }
+
+    .PartnerPageTable td {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+
+    .PartnerPageTable td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 20px;
+   }
+
+   .PartnerPageTable tr {
+        margin-bottom: 20px;
+   }
+
+   .description__partner {
+    width: 100%;
+   }
+
+   .btn__table__partner {
+    justify-content: right !important;
+   }
+
+}
+
+@media(max-width: 1150px) {
+    .order__block__info__column,
+    .order__block__info__datePred,
+    .order__block__info__date,
+    .order__block__info__description,
+    .order__block__info__img,
+    .order__block__info__company {
+        font-size: 16px;
+    }
+
+    .info__item__title {
+        font-size: 20px;
+    }
+
+    .info__item__date,
+    .order__block__info__company {
+        font-size: 16px !important;
+    }
+
+    .info__item__sotr {
+        font-size: 20px;
+    }
+
+    .info__item__fio {
+        font-size: 16px;
+    }
+
+    .info__item__img {
+        width: 50px;
+        height: 50px;
+    }
+
 }
 
 @media(max-width: 1024px) {
@@ -25,7 +91,6 @@
         overflow: auto;
     }
 
-   
 
     .footer.main {
         margin-top: 75px;
@@ -94,6 +159,12 @@
 
     .header__burger:hover {
         cursor: pointer;
+    }
+
+    .order__block__info__items {
+        flex-wrap: wrap;
+        column-gap: 20px;
+        row-gap: 20px;
     }
 
     .header__nav {
@@ -352,6 +423,14 @@
     .index__profile__order__title {
         margin-bottom: 20px;
     }
+
+    .info__item__img {
+        display: none;
+    }
+
+    .order__block__info__item:last-child {
+        column-gap: 15px;
+    }
 }
 
 @media(max-width: 530px) {
@@ -417,6 +496,10 @@
     }
     .intro__subtitle {
         font-size: 20px;
+    }
+
+    .page__role__items {
+        justify-content: center;
     }
 
     .sidebar__profile {

@@ -9,7 +9,15 @@ import ProfileSettingsPage from '../pages/profile/SettingsPage.vue'
 import ProfileCompanyPage from '../pages/profile/CompanyPage.vue'
 import ProfileAllOrderPage from '../pages/profile/AllOrderPage.vue'
 import ProfileActiveOrderPage from '../pages/profile/ActiveOrderPage.vue'
+import ProfileOrderPage from '../pages/profile/OrderPage.vue'
+import ProfileOrderCreatePage from '../pages/profile/OrderCreatePage.vue'
 import AdminUsers from '../pages/admin/UserPage.vue'
+import AdminEmployee from '../pages/admin/EmployeePage.vue'
+import AdminOrder from '../pages/admin/AllOrderPage.vue'
+import AdminCompany from '../pages/admin/CopmanyPage.vue'
+import AdminPartner from '../pages/admin/PartnerPage.vue'
+import AdminPerson from '../pages/admin/EmployeePersonPage.vue'
+import AdminClientPerson from '../pages/admin/ClientPersonPage.vue'
 
 export default new VueRouter ({
     mode: 'history',
@@ -69,10 +77,51 @@ export default new VueRouter ({
                     component: ProfileActiveOrderPage,
                 },
                 {
+                    path: '/order',
+                    name: 'order',
+                    component: ProfileOrderPage,
+                },
+                {
+                    path: '/orderCreate',
+                    name: 'orderCreate',
+                    component: ProfileOrderCreatePage,
+                },
+                // !ADMIN PAGE
+                {
                     path: '/admin/users',
                     name: 'adminUsers',
                     component: AdminUsers,
-                }
+                },
+                {
+                    path: '/admin/employee',
+                    name: 'adminEmployee',
+                    component: AdminEmployee,
+                },
+                {
+                    path: '/admin/order',
+                    name: 'adminOrder',
+                    component: AdminOrder,
+                },
+                {
+                    path: '/admin/company',
+                    name: 'adminCompany',
+                    component: AdminCompany,
+                },
+                {
+                    path: '/admin/partners',
+                    name: 'adminPartners',
+                    component: AdminPartner,
+                },
+                {
+                    path: '/admin/person',
+                    name: 'adminPerson',
+                    component: AdminPerson,
+                },
+                {
+                    path: '/admin/personClient',
+                    name: 'adminClientPerson',
+                    component: AdminClientPerson,
+                },
             ]
         },
     ]

@@ -10,9 +10,7 @@
             </div>
             <div class="index__profile__orders__info">
                 <h3 class="index__profile__order__title">Все заказы</h3>
-                <router-link :to="{ name: 'orderCreate' }" class="btn btn-orange">
-                Сделать заказ
-                </router-link>
+                
             </div>
             <table class="table orderPageTable">
                 <thead>
@@ -21,7 +19,9 @@
                         <th scope="col">Товар</th>
                         <th scope="col">Статус заказа</th>
                         <th scope="col">Дата заказа</th>
+                        <th scope="col">Заказчик</th>
                         <th scope="col">Сотрудник</th>
+                        <th scope="col">Компания</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -31,7 +31,9 @@
                         <td data-label="Товар">Диски</td>
                         <td data-label="Статус заказа">Оформлен</td>
                         <td data-label="Дата доставки">15.02.2022, 15:30</td>
+                        <td data-label="Заказчик">Демошенков С.М.</td>
                         <td data-label="Сотрудник">Демошенков С.М.</td>
+                        <td data-label="Компания">ООО "ПСК"</td>
                         <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
                     </tr>
                     <tr>
@@ -39,7 +41,9 @@
                         <td data-label="Товар">Диски</td>
                         <td data-label="Статус заказа">Оформлен</td>
                         <td data-label="Дата доставки">15.02.2022, 15:30</td>
+                        <td data-label="Заказчик">Демошенков С.М.</td>
                         <td data-label="Сотрудник">Демошенков С.М.</td>
+                        <td data-label="Компания">ООО "ПСК"</td>
                         <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
                     </tr>
                     <tr>
@@ -47,12 +51,11 @@
                         <td data-label="Товар">Диски</td>
                         <td data-label="Статус заказа">Оформлен</td>
                         <td data-label="Дата доставки">15.02.2022, 15:30</td>
+                        <td data-label="Заказчик">Демошенков С.М.</td>
                         <td data-label="Сотрудник">Демошенков С.М.</td>
-                        <td data-label="">
-                            <router-link :to="{name: 'order'}" class="btn btn-orange ">
-                            Открыть
-                        </router-link>
-                        </td>
+                        <td data-label="Компания">ООО "ПСК"</td>
+                        
+                        <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
                     </tr>
                 </tbody>
             </table>
