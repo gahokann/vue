@@ -4,14 +4,14 @@
         <div class="form__block">
             <img src="../assets/img/logo.png" alt="" class="form__img">
             <h3 class="form__title">Авторизация</h3>
-            <form action="" class="form">
+            <form class="form" @submit.prevent="formSubmit">
                 <label for="email" class="form__label">Электронная почта</label>
-                <input type="text" id="email" class="form__input" placeholder="info@1snab.ru">
+                <input type="text" id="email" class="form__input" v-model="form.email" placeholder="info@1snab.ru">
                 
                 <label for="password" class="form__label">Пароль</label>
-                <input type="password" id="password" class="form__input" placeholder="123456789...">
+                <input type="password" id="password" v-model="form.password" class="form__input" placeholder="123456789...">
                 <p class="form__input-comment">Длина пароля от 8 символов</p>
-                <button class="btn btn-orange auth__btn">Авторизация</button>
+                <button type="submit" class="btn btn-orange auth__btn">Авторизация</button>
             </form>
             <div class="form__links">
                 <router-link :to="{ name: 'reg' }" class="form__link">
@@ -31,6 +31,33 @@ export default {
     components: {
         HeaderPages,
         FooterPages
+    },
+    data() {
+        return {
+            form: {
+                email: '',
+                password: '',
+            },
+            errors: []
+        }
+    },
+    methods: {
+        formSubmit() {
+            this.signIn()
+        },
+        signIn() {
+            this.$load(async() => {
+                const data = (await this.$api.auth.auth({
+                    email: this.form.email,
+                    password: this.form.password
+                })).data
+                localStorage.setItem('token', data.data.token)
+                localStorage.setItem('user', JSON.stringify(data.data.user))
+                this.$store.dispatch('user/setUser', data.data.user)
+                localStorage.setItem('auth', true)
+                this.$router.push({name: 'profileMain'})
+            })
+        }
     }
 }
 </script>

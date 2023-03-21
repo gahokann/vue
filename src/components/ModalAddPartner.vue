@@ -16,6 +16,10 @@
                             <label for="desc" class="form-label">Информация (кратко)</label>
                             <textarea type="text" class="form-control" id="desc" style="max-height: 200px"></textarea>
                         </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Логотип компании</label>
+                            <input type="file" class="form-control" id="name">
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

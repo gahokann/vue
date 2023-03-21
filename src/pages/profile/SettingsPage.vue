@@ -4,8 +4,8 @@
             <div class="settings__item">
                 <h3 class="settings__item__title">ФИО</h3>
                 <p class="settings__item__fio">Демошенков Сергей Михайлович</p>
-                <a href="#" @click="changeFio = !changeFio" class="btn btn-orange">Изменить</a>
-                <div v-if="changeFio">
+                <a href="#" @click="changeFio.active = !changeFio.active" class="btn btn-orange">Изменить</a>
+                <div class="form__settings" :class="changeFio">
                     <form action="" class="form settings">
                         <label for="firstname" class="form__label">Фамилия</label>
                         <input type="text" id="firstname" value="Демошенков" class="form__input change" placeholder="info@1snab.ru">
@@ -20,8 +20,8 @@
             <div class="settings__item">
                 <h3 class="settings__item__title">Электронная Почта</h3>
                 <p class="settings__item__fio">topsamper227@mail.ru</p>
-                <a href="#" @click="changeEmail = !changeEmail" class="btn btn-orange">Изменить</a>
-                <div v-if="changeEmail">
+                <a href="#" @click="changeEmail.active = !changeEmail.active" class="btn btn-orange">Изменить</a>
+                <div class="form__settings" :class="changeEmail">
                     <form action="" class="form settings">
                         <label for="password" class="form__label">Введите пароль</label>
                         <input type="password" id="password" class="form__input change" placeholder="123456789...">
@@ -34,8 +34,8 @@
             <div class="settings__item">
                 <h3 class="settings__item__title">Номер телефона</h3>
                 <p class="settings__item__fio">+79778598026</p>
-                <a href="#" @click="changePhone = !changePhone" class="btn btn-orange">Изменить</a>
-                <div v-if="changePhone">
+                <a href="#" @click="changePhone.active = !changePhone.active" class="btn btn-orange">Изменить</a>
+                <div class="form__settings" :class="changePhone">
                     <form action="" class="form settings">
                         <label for="password2" class="form__label">Введите пароль</label>
                         <input type="password" id="password2" class="form__input change" placeholder="123456789...">
@@ -48,8 +48,8 @@
             <div class="settings__item">
                 <h3 class="settings__item__title">Пароль</h3>
                 <p class="settings__item__fio">*******</p>
-                <a href="#" @click="changePassword = !changePassword" class="btn btn-orange">Изменить</a>
-                <div v-if="changePassword">
+                <a href="#" @click="changePassword.active = !changePassword.active" class="btn btn-orange">Изменить</a>
+                <div class="form__settings" :class="changePassword">
                     <form action="" class="form settings">
                         <label for="lastpassword" class="form__label">Старый пароль</label>
                         <input type="password" id="lastpassword" class="form__input change" placeholder="123456789...">
@@ -68,10 +68,18 @@
 export default {
     data() {
         return {
-            changeFio: false,
-            changeEmail: false,
-            changePhone: false,
-            changePassword: false,
+            changeFio: {
+                active: false,
+            },
+            changeEmail: {
+                active: false,
+            },
+            changePhone: {
+                active: false,
+            },
+            changePassword: {
+                active: false,
+            },
         }
     }
 }

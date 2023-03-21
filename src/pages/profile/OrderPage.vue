@@ -2,7 +2,9 @@
     <div class="index__profile">
         <div class="user__table__admin allOrderPage">
             <div class="index__profile__orders__info">
-                <h3 class="index__profile__order__title">Заказ: #1234</h3>
+                <h3 class="index__profile__order__title">
+                    Заказ: #1234
+                </h3>
             </div>
             <div class="order__block">
                 <div class="order__block__info__items">

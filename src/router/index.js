@@ -18,6 +18,7 @@ import AdminCompany from '../pages/admin/CopmanyPage.vue'
 import AdminPartner from '../pages/admin/PartnerPage.vue'
 import AdminPerson from '../pages/admin/EmployeePersonPage.vue'
 import AdminClientPerson from '../pages/admin/ClientPersonPage.vue'
+import NotFound from '../pages/NotFound.vue'
 
 export default new VueRouter ({
     mode: 'history',
@@ -50,6 +51,13 @@ export default new VueRouter ({
             path: '/profile',
             name: 'profile',
             component: ProfileDefaultPage,
+            beforeEnter: (to, from, next) => {
+                if(localStorage.getItem('auth')) {
+                    next()
+                } else {
+                    next({name: 'main'})
+                }
+            },
             children: [
                 {
                     path: '/',
@@ -124,5 +132,10 @@ export default new VueRouter ({
                 },
             ]
         },
+        {
+            path: '*',
+            name: 'notFound',
+            component: NotFound
+        }
     ]
 })

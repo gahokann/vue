@@ -17,7 +17,7 @@
                 <textarea type="number" id="text" class="form__input textarea" placeholder="..." />
 
                 <label for="file" class="form__label">Изображение</label>
-                <input type="file" id="file" class="form__input">
+                <input type="file" class="form-control" id="name">
                 <p class="form__input-comment">Не обязательно</p>
 
                 <button class="btn btn-orange auth__btn">Подтвердить</button>
