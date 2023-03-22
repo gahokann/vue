@@ -1,3 +1,4 @@
+import store from '../store/index'
 import VueRouter from 'vue-router'
 import MainPage from '../pages/MainPage.vue'
 import AuthPage from '../pages/AuthPage.vue'
@@ -46,13 +47,12 @@ export default new VueRouter ({
             name: 'partners',
             component: PartnersPage,
         },
-
         {
             path: '/profile',
             name: 'profile',
             component: ProfileDefaultPage,
             beforeEnter: (to, from, next) => {
-                if(localStorage.getItem('auth')) {
+                if(store.getters.isAuthenticated) {
                     next()
                 } else {
                     next({name: 'main'})
@@ -94,6 +94,21 @@ export default new VueRouter ({
                     name: 'orderCreate',
                     component: ProfileOrderCreatePage,
                 },
+                
+            ]
+        },
+        {
+            path: '/admin',
+            name: 'profile',
+            component: ProfileDefaultPage,
+            // beforeEnter: (to, from, next) => {
+            //     if() {
+            //         next()
+            //     } else {
+            //         next({name: 'main'})
+            //     }
+            // },
+            children: [
                 // !ADMIN PAGE
                 {
                     path: '/admin/users',

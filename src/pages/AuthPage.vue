@@ -26,6 +26,7 @@
 <script>
 import HeaderPages from '@/components/HeaderPages.vue';
 import FooterPages from '@/components/FooterPages.vue';
+import { mapActions } from 'vuex';
 
 export default {
     components: {
@@ -42,19 +43,19 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['setToken', 'setUser']),
         formSubmit() {
             this.signIn()
         },
-        signIn() {
+        async signIn() {
             this.$load(async() => {
                 const data = (await this.$api.auth.auth({
                     email: this.form.email,
                     password: this.form.password
                 })).data
-                localStorage.setItem('token', data.data.token)
-                localStorage.setItem('user', JSON.stringify(data.data.user))
-                this.$store.dispatch('user/setUser', data.data.user)
-                localStorage.setItem('auth', true)
+
+                this.setUser(data.data.user)
+                this.setToken(data.data.token)
                 this.$router.push({name: 'profileMain'})
             })
         }

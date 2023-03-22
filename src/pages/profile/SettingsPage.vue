@@ -3,7 +3,7 @@
         <div class="settings__items">
             <div class="settings__item">
                 <h3 class="settings__item__title">ФИО</h3>
-                <p class="settings__item__fio">Демошенков Сергей Михайлович</p>
+                <p class="settings__item__fio">{{ `${getUser.first_name} ${getUser.second_name} ${getUser.last_name}`  }}</p>
                 <a href="#" @click="changeFio.active = !changeFio.active" class="btn btn-orange">Изменить</a>
                 <div class="form__settings" :class="changeFio">
                     <form action="" class="form settings">
@@ -19,7 +19,7 @@
             </div>
             <div class="settings__item">
                 <h3 class="settings__item__title">Электронная Почта</h3>
-                <p class="settings__item__fio">topsamper227@mail.ru</p>
+                <p class="settings__item__fio">{{ getUser.email }}</p>
                 <a href="#" @click="changeEmail.active = !changeEmail.active" class="btn btn-orange">Изменить</a>
                 <div class="form__settings" :class="changeEmail">
                     <form action="" class="form settings">
@@ -33,7 +33,7 @@
             </div>
             <div class="settings__item">
                 <h3 class="settings__item__title">Номер телефона</h3>
-                <p class="settings__item__fio">+79778598026</p>
+                <p class="settings__item__fio">{{ getUser.phone }}</p>
                 <a href="#" @click="changePhone.active = !changePhone.active" class="btn btn-orange">Изменить</a>
                 <div class="form__settings" :class="changePhone">
                     <form action="" class="form settings">
@@ -65,6 +65,7 @@
     </div>
 </template>
 <script>
+ import { mapGetters } from 'vuex';
 export default {
     data() {
         return {
@@ -81,7 +82,10 @@ export default {
                 active: false,
             },
         }
-    }
+    },
+    computed: {
+        ...mapGetters(['getUser'])
+    },
 }
 </script>
 <style lang="">

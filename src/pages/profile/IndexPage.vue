@@ -3,17 +3,17 @@
         <div class="index__profile__items">
             <div class="index__profile__item">
                 <img src="../../assets/img/1.jpg" class="index__profile__item__logo" alt="">
-                <p class="index__profile__name">Сергей</p>
-                <p class="index__profile__level">Пользователь</p>
-                <p class="index__profile__company">ООО "ПСК"</p>
+                <p class="index__profile__name">{{ getUser.second_name }}</p>
+                <p class="index__profile__level">{{ getUser.role_name }}</p>
+                <p class="index__profile__company">{{ getUser.company_name }}</p>
             </div>
                 <div class="index__profile__item">
-                    <h3 class="index__profile__fio">Демошенков Сергей Михайлович</h3>
-                    <p class="index__profile__email">topsamper227@mail.ru</p>
-                    <p class="index__profile__phone">+79778598026</p>
+                    <h3 class="index__profile__fio">{{ `${getUser.first_name} ${getUser.second_name} ${getUser.last_name}`  }}</h3>
+                    <p class="index__profile__email">{{ getUser.email }}</p>
+                    <p class="index__profile__phone">Телефон не указан</p>
                 <div class="index__profile__dostup">
-                    <h3 class="profile__dostup__title">Ваш уровень доступа: Пользователь</h3>
-                    <p class="profile__dostup__text">Вы имеете стандартные уровни функций. Сделать заказы невозможно</p>
+                    <h3 class="profile__dostup__title">Ваш уровень доступа: {{ getUser.role_name }}</h3>
+                    <p class="profile__dostup__text">{{ getUser.role_info }}</p>
                 </div>
             </div>
         </div>
@@ -66,8 +66,15 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
-    
+    computed: {
+        ...mapGetters(['getUser'])
+    },
+    data() {
+        return {
+        }
+    }
 }
 </script>
 <style lang="">

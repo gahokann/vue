@@ -1058,3 +1058,7 @@ p {
     visibility: visible;
     position: relative;
 }
+
+.btn__logout:hover {
+    cursor: pointer;
+}
