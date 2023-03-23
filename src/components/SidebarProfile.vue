@@ -8,8 +8,9 @@
             </div>
             <div class="separator burger"></div>
             <nav class="sidebar__profile__nav nav__mobile">
+                <div class="profile__mobile">
                 <h5 class="sidebar__profile__nav__title">Профиль</h5>
-                <div @click="burgerProfile.active = !burgerProfile.active" id="burger__profile" class="sidebar__profile__nav__link burger" :class="burgerProfile">
+                <div @click="burgerProfile.active = !burgerProfile.active" id="burger__profile" class="sidebar__profile__nav__link burger" :class="burgerProfile" v-if="isAdmin">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                     </svg>
@@ -89,11 +90,12 @@
                     <p class="sidebar__profile__nav__link__text">Активные заказы</p>
                 </router-link>
                 
-                <div class="separator"></div>
-                <div>
-                    
-                </div>
+                
+            </div>
                 <!-- !ADMINS -->
+                <div class="admin__mobible" v-if="isAdmin">
+                    <div class="separator"></div>
+                    
                 <h5 class="sidebar__profile__nav__title">Панель управления</h5>
                 <!-- <router-link :to="{name: 'adminUsers'}" class="sidebar__profile__nav__link ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
@@ -133,11 +135,12 @@
 </svg>
                     <p class="sidebar__profile__nav__link__text">Партнеры</p>
                 </router-link>
-                
+            </div>
             </nav>
         </sidebar>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
     data() {
         return {
@@ -145,6 +148,10 @@ export default {
                 active:false,
             }
         }
+    },
+    
+    computed: {
+        ...mapGetters(["isAdmin"]),
     }
 }
 </script>

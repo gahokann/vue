@@ -3,6 +3,9 @@ export default function(instance) {
         userInfo() {
             return instance.get('profile/index',)
         },
+        orderAll() {
+            return instance.get('order/index')
+        }
     }
   }
   

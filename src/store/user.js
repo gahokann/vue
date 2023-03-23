@@ -2,12 +2,10 @@ export default {
     actions: {
         // Работа из api
         setUser({ commit }, user) {
-            // localStorage.setItem('token', token)
-            // console.log(token);
-
             commit("SET_USER", user);
+            commit('SET_ROLE', user.role_id)
+            localStorage.setItem('role_id', user.role_id)
         },
-
         setToken({ commit }, token) {
             localStorage.setItem("token", token);
             commit("SET_TOKEN", token);
@@ -15,6 +13,7 @@ export default {
 
         logout({ commit }) {
             localStorage.removeItem("token");
+            localStorage.removeItem("role_id");
 
             commit("LOGOUT");
         },
@@ -24,7 +23,6 @@ export default {
         // добавление в стате
         SET_USER(state, user) {
             state.user = user;
-            // state.token = token;
             state.status = true;
         },
 
@@ -32,9 +30,14 @@ export default {
             state.token = token;
         },
 
+        SET_ROLE(state, role_id) {
+            state.role_id = role_id
+        },
+
         LOGOUT(state) {
             state.status = "";
             state.token = "";
+            state.role_id = ''
             state.user = [];
         },
     },
@@ -44,6 +47,7 @@ export default {
         user: [],
         token: localStorage.getItem("token"),
         status: "",
+        role_id: ''
     },
 
     getters: {
@@ -53,5 +57,7 @@ export default {
         },
 
         isAuthenticated: (state) => !!state.token,
+        isStatus: (state) => state.status,
+        isAdmin: (state) => state.role_id > 1
     },
 };

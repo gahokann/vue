@@ -27,7 +27,6 @@
 import HeaderPages from '@/components/HeaderPages.vue';
 import FooterPages from '@/components/FooterPages.vue';
 import { mapActions } from 'vuex';
-
 export default {
     components: {
         HeaderPages,
@@ -53,11 +52,11 @@ export default {
                     email: this.form.email,
                     password: this.form.password
                 })).data
-
                 this.setUser(data.data.user)
                 this.setToken(data.data.token)
                 this.$router.push({name: 'profileMain'})
             })
+
         }
     }
 }

@@ -99,15 +99,15 @@ export default new VueRouter ({
         },
         {
             path: '/admin',
-            name: 'profile',
+            name: 'admin',
             component: ProfileDefaultPage,
-            // beforeEnter: (to, from, next) => {
-            //     if() {
-            //         next()
-            //     } else {
-            //         next({name: 'main'})
-            //     }
-            // },
+            beforeEnter: (to, from, next) => {
+                if(store.getters.isAdmin && store.getters.isAuthenticated) {
+                    next()
+                } else {
+                    next({name: 'profileMain'})
+                }
+            },
             children: [
                 // !ADMIN PAGE
                 {

@@ -5,7 +5,7 @@
                 <img src="../../assets/img/1.jpg" class="index__profile__item__logo" alt="">
                 <p class="index__profile__name">{{ getUser.second_name }}</p>
                 <p class="index__profile__level">{{ getUser.role_name }}</p>
-                <p class="index__profile__company">{{ getUser.company_name }}</p>
+                <p class="index__profile__company" v-if="getUser.company != null">{{ getUser.company.name }}</p> 
             </div>
                 <div class="index__profile__item">
                     <h3 class="index__profile__fio">{{ `${getUser.first_name} ${getUser.second_name} ${getUser.last_name}`  }}</h3>
@@ -71,10 +71,9 @@ export default {
     computed: {
         ...mapGetters(['getUser'])
     },
-    data() {
-        return {
-        }
-    }
+
+
+    
 }
 </script>
 <style lang="">

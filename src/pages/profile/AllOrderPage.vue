@@ -54,7 +54,7 @@ export default {
         this.$load(async() => {
             const data = (await this.$api.order.orderAll()).data
             console.log(data.data);
-            this.setOrder(data.data)
+            // this.setOrder(data.data)
         })
     },
 
