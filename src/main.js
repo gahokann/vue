@@ -15,10 +15,10 @@ Vue.use(LoadPlugin)
 import '@/assets/css/style.css'
 import '@/assets/css/media.css'
 
-const token = localStorage.getItem('user-token')
-if (token) {
-  ApiPlugin.defaults.headers.common[`Bearer ${localStorage.getItem('token')}`] = token
-}
+// const token = localStorage.getItem('user-token')
+// if (token) {
+//   ApiPlugin.defaults.headers.common[`Bearer ${localStorage.getItem('token')}`] = token
+// }
 
 new Vue({
   render: h => h(App),

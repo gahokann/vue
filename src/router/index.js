@@ -21,6 +21,7 @@ import AdminPerson from '../pages/admin/EmployeePersonPage.vue'
 import AdminClientPerson from '../pages/admin/ClientPersonPage.vue'
 import NotFound from '../pages/NotFound.vue'
 
+
 export default new VueRouter ({
     mode: 'history',
     routes: [

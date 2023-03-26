@@ -120,6 +120,7 @@ export default {
             const data = (await this.$api.user.userInfo()).data;
             this.setUser(data.data);
         } catch (error) {
+            // console.log(error)
             this.logOut()
             this.$router.push({name: 'main'})
         }
