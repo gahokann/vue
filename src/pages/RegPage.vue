@@ -125,7 +125,7 @@
 <script>
 import HeaderPages from "@/components/HeaderPages.vue";
 import FooterPages from "@/components/FooterPages.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from 'vuelidate/lib/validators'
@@ -160,37 +160,21 @@ export default {
             c_password: {required, minLength: minLength(8)},
         },
     },
+    computed: {
+        ...mapGetters(['getError'])
+    },
     methods: {
-        ...mapActions(["setToken", "setUser"]),
+        ...mapActions(['regUser']),
         formSubmit() {
-            if (this.form.password == this.formserber.c_password) {
-                this.$v.form.$touch()
-                if (!this.$v.form.$error) {
-                    this.signUp();
+            this.$v.form.$touch()
+            if (!this.$v.form.$error) {
+            if (this.form.password == this.form.c_password) {
+                    this.regUser(this.form)
                 }
-            } else {
-                console.error("Пароли не совпадают");
             }
+
         },
-        async signUp() {
-            // this.$load(async() => {
-            const data = (
-                await this.$api.auth.reg({
-                    email: this.email,
-                    first_name: this.first_name,
-                    second_name: this.second_name,
-                    last_name: this.last_name,
-                    date_birth: this.date,
-                    password: this.password,
-                    c_password: this.c_password,
-                })
-            ).data;
-            console.log(data);
-            this.setUser(data.data.user);
-            this.setToken(data.data.token);
-            this.$router.push({ name: "profileMain" });
-            // })
-        },
+        
     },
 };
 </script>

@@ -10,16 +10,29 @@ export default (api) => {
             async authUser( {commit} , user) {
                 await api.auth.auth(user)
                 .then(res => {
-                    console.log(res.data.user.role_id)
                     commit("SET_TOKEN", res.data.token)
                     commit("SET_ERROR", "")
-                    router.push("/profile")
+                    router.push({ name: 'profileMain' })
                 })
                 .catch(err => {
                     commit("SET_ERROR", err.response.data.message)
                     commit("LOGOUT");
                 });
             },
+
+            async regUser({commit}, user) {
+                await api.auth.reg(user)
+                .then(res => {
+                    commit("SET_TOKEN", res.data.token)
+                    commit("SET_ERROR", "")
+                    router.push({ name: 'profileMain' })
+                })
+                .catch(err => {
+                    commit("SET_ERROR", err.response.data.message)
+                    commit("LOGOUT")
+                });
+            },
+            
             logout({ commit }) {
                 commit("LOGOUT");
             },
@@ -40,16 +53,13 @@ export default (api) => {
             LOGOUT(state) {
                 localStorage.removeItem("token");
                 localStorage.removeItem("role_id");
-                state.status = "";
                 state.token = "";
-                state.role_id = "";
             },
         },
 
         state: {
             // переменные
             token: localStorage.getItem("token") || "",
-            
             error: ""
         },
 

@@ -87,16 +87,22 @@
                 </transition>
             </div>
         </div>
+        <transition name="slide-fade">
+            <PreloaderPage />
+        </transition>
+        
     </div>
 </template>
 <script>
 import SidebarProfile from "@/components/SidebarProfile.vue";
 import { mapActions, mapGetters } from "vuex";
+import PreloaderPage from "../layouts/PreloaderPage.vue";
 
 export default {
     name: "DefaultPage",
     components: {
         SidebarProfile,
+        PreloaderPage,
     },
     data() {
         return {
@@ -116,17 +122,16 @@ export default {
     },
 
     async created() {
-        try {
-            const data = (await this.$api.user.userInfo()).data;
-            this.setUser(data.data);
-        } catch (error) {
-            // console.log(error)
-            this.logOut()
-            this.$router.push({name: 'main'})
-        }
+        // try {
+            // const data = (await this.$api.user.userInfo()).data;
+            this.setUser();
+        // } catch (error) {
+            // // console.log(error)
+            // this.logOut()
+            // this.$router.push({name: 'main'})
+        // }
 
         
     }
 };
 </script>
-<style lang=""></style>

@@ -61,7 +61,7 @@ export default new VueRouter ({
             },
             children: [
                 {
-                    path: '/',
+                    path: '/index',
                     name: 'profileMain',
                     component: ProfileIndexPage,
                 },

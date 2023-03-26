@@ -1,10 +1,25 @@
-export default () => {
+import VueRouter from 'vue-router'
+import Vue from 'vue';
+import router from '../../router/index'
+// ! ПОПРОБОВАТЬ ИЗМЕНИТЬ!
+Vue.use(VueRouter)
+export default (api) => {
     return {
         actions: {
             // Работа из api
-            setUser( {commit} , user) {
-                commit('SET_USER', user)
-                commit("SET_ROLE", user.role_id)
+            async setUser({commit}) {
+                await api.user.userInfo()
+                .then(res => {
+                    commit('SET_USER' ,res.data.data)
+                    commit('SET_ROLE' ,res.data.data.role_id)
+                }).catch(() => {
+                    commit('LOGOUT')
+                    router.push({ name: 'main' })
+                })
+
+
+                // commit('SET_USER', user)
+                // commit("SET_ROLE", user.role_id)
                 
 
                 // console.log(user)
@@ -24,6 +39,8 @@ export default () => {
                 state.role_id = role_id;
             },
             LOGOUT(state) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("role_id");
                 state.user = "";
                 state.role_id = "";
             },

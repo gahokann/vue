@@ -21,7 +21,11 @@
                 <router-link :to="{ name: 'main' }" class="header__nav__link">
                 Информация
                 </router-link>
-                <router-link :to="{ name: 'auth' }" class="header__nav__link btn btn-orange">
+
+                <router-link v-if="!isAuthenticated" :to="{ name: 'auth' }" class="header__nav__link btn btn-orange">
+                Личный кабинет
+                </router-link>
+                <router-link v-if="isAuthenticated" :to="{ name: 'profileMain' }" class="header__nav__link btn btn-orange">
                 Личный кабинет
                 </router-link>
             </nav>
@@ -29,6 +33,7 @@
     </header>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
     data() {
         return {
@@ -36,7 +41,10 @@ export default {
                 active: false,
             }
         }
-    }
+    },
+    computed: {
+        ...mapGetters(['isAuthenticated'])
+    },
 }
 </script>
 <style lang="">
