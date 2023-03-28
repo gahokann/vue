@@ -9,6 +9,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     overflow: overlay !important;
+
+    min-height: 100%;
+
 }
 
 *,
@@ -1077,4 +1080,23 @@ p {
     font-size: 18px;
     font-weight: 500;
     text-align: center;
+}
+
+.valid__form__settings {
+    font-size: 18px;
+    color: green;
+    font-weight: 500;
+}
+
+.invalid-feedback__formSetting {
+    color: #f00;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.form__text {
+    text-align: center;
+    font-weight: 400;
+    font-size: 18px;
+    padding-top: 20px;
 }

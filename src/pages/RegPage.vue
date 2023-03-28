@@ -64,6 +64,22 @@
                 <p v-if="$v.form.email.$dirty && !$v.form.email.email" class="invalid-feedback">Неверно указан адрес электронной почты</p> 
                 <!-- === -->
 
+
+                <label for="email" class="form__label">Номер телефона</label>
+                <input
+                    type="text"
+                    id="phone"
+                    class="form__input"
+                    placeholder="+79998885522"
+                    v-model="form.phone_number"
+                    :class="$v.form.phone_number.$error ? 'is-invalid' : ''"
+                />
+
+                <!-- Ошибки ври валидации -->
+                <p v-if="$v.form.phone_number.$dirty && !$v.form.phone_number.required" class="invalid-feedback">Обязательное поле</p> 
+                <p v-if="$v.form.phone_number.$dirty && !$v.form.phone_number.minLength" class="invalid-feedback">Неверно указан номер телефона</p> 
+                <!-- === -->
+
                 <label for="date" class="form__label">Дата рождения</label>
                 <input
                     type="date"
@@ -142,6 +158,7 @@ export default {
                 second_name: "",
                 last_name: "",
                 email: "",
+                phone_number: "",
                 date: "",
                 password: "",
                 c_password: "",
@@ -155,6 +172,7 @@ export default {
             second_name: {required, minLength: minLength(2)},
             last_name: {required, minLength: minLength(2)},
             email: {required, email},
+            phone_number: {required, minLength: minLength(12)},
             date: {required},
             password: {required, minLength: minLength(8)},
             c_password: {required, minLength: minLength(8)},

@@ -25,8 +25,7 @@ export default {
 </script>
 
 <style>
-body {
-}
+
 #preloader {
     background-color: #fff;
     position: fixed;

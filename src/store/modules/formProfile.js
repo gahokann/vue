@@ -32,7 +32,85 @@ export default (api) => {
                     commit("LOGOUT")
                 });
             },
-            
+
+            async fioChange({commit, dispatch}, data) {
+                await api.user.fioChange(data)
+                .then(res => {
+                    dispatch('setUser')
+                    commit('SET_SUCCESS', res.data)
+                    commit("SET_ERROR_SETTINGS", '')
+                    setTimeout(() => {
+                        commit('SET_SUCCESS', '')
+                    }, 2500);
+                })
+                .catch(err => {
+                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                })
+            },
+
+            async emailChange({commit, dispatch}, data) {
+                await api.user.emailChange(data)
+                .then(res => {
+                    dispatch('setUser')
+                    commit('SET_SUCCESS', res.data)
+                    commit("SET_ERROR_SETTINGS", '')
+                    setTimeout(() => {
+                        commit('SET_SUCCESS', '')
+                    }, 2500);
+                })
+                .catch(err => {
+                    console.log(err);
+                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                })
+            },
+
+            async phoneChange({commit, dispatch}, data) {
+                await api.user.phoneChange(data)
+                .then(res => {
+                    dispatch('setUser')
+                    commit('SET_SUCCESS', res.data)
+                    commit("SET_ERROR_SETTINGS", '')
+                    setTimeout(() => {
+                        commit('SET_SUCCESS', '')
+                    }, 2500);
+                })
+                .catch(err => {
+                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                })
+            },
+
+            async passwordChange({commit, dispatch}, data) {
+                await api.user.passwordChange(data)
+                .then(res => {
+                    dispatch('setUser')
+                    commit('SET_SUCCESS', res.data)
+                    commit("SET_ERROR_SETTINGS", '')
+                    setTimeout(() => {
+                        commit('SET_SUCCESS', '')
+                    }, 2500);
+                })
+                .catch(err => {
+                    console.log(err)
+                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                })
+            },
+
+            async companyAdd({ commit, dispatch }, data) {
+                await api.user.companyAdd(data)
+                .then(res => {
+                    commit('SET_SUCCESS', res.data.message)
+                    dispatch('setUser');
+
+                    setTimeout(() => {
+                        commit('SET_SUCCESS', '')
+                    }, 5000);
+                })
+                .catch(err => {
+                    console.log(err)
+                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                })
+            },
+
             logout({ commit }) {
                 commit("LOGOUT");
             },
@@ -46,8 +124,16 @@ export default (api) => {
                 
             },
 
+            SET_SUCCESS(state, success) {
+                state.success = success
+            },
+
             SET_ERROR(state, error) {
                 state.error = error
+            },
+
+            SET_ERROR_SETTINGS(state, error) {
+                state.errorSettings = error
             },
 
             LOGOUT(state) {
@@ -60,13 +146,23 @@ export default (api) => {
         state: {
             // переменные
             token: localStorage.getItem("token") || "",
-            error: ""
+            error: "",
+            errorSettings: '',
+            success: '',
         },
 
         getters: {
             // получение из переменных
             getError(state) {
                 return state.error
+            },
+
+            getErrorSettings(state) {
+                return state.errorSettings
+            },
+
+            getSuccess(state) {
+                return state.success
             },
 
             isAuthenticated: (state) => !!state.token,

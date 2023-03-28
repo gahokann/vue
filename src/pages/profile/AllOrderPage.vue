@@ -40,22 +40,15 @@
     </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'allOrderPage',
     methods: {
-        ...mapActions(['setOrder']),
     },
     computed: {
-        ...mapGetters(['allOrders'])
     },
     created() {
-        this.$load(async() => {
-            const data = (await this.$api.order.orderAll()).data
-            console.log(data.data);
-            // this.setOrder(data.data)
-        })
+        
     },
 
 }

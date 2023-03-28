@@ -4,7 +4,6 @@ import api from '../api/index'
 
 
 import user from './modules/user'
-import order from './modules/order'
 import formProfile from './modules/formProfile'
 
 
@@ -14,6 +13,5 @@ export default new Vuex.Store({
     modules: {
         user: user(api), 
         formProfile: formProfile(api),
-        order,
     }
 })

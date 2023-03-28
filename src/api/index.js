@@ -1,12 +1,12 @@
 import instance from './instance'
 
-import authModule from './auth'
-import orderModule from './order'
-import userModule from './user'
+import authModule from './plugins/auth'
+import userModule from './plugins/user'
+import orderModule from './plugins/order'
 
 export default {
     auth: authModule(instance),
-    order: orderModule(instance),
     user: userModule(instance),
+    order: orderModule(instance),
 }
 

@@ -1,5 +1,5 @@
 <template lang="">
-    <sidebar class="sidebar__profile" :class="burgerProfile">
+    <div name="sidebar" class="sidebar__profile" :class="burgerProfile">
             <p class="nav__profile__role">
                 Уровень доступа: Пользователь
             </p>
@@ -137,7 +137,7 @@
                 </router-link>
             </div>
             </nav>
-        </sidebar>
+        </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';

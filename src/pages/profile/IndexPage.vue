@@ -10,7 +10,7 @@
                 <div class="index__profile__item">
                     <h3 class="index__profile__fio">{{ `${getUser.first_name} ${getUser.second_name} ${getUser.last_name}`  }}</h3>
                     <p class="index__profile__email">{{ getUser.email }}</p>
-                    <p class="index__profile__phone">Телефон не указан</p>
+                    <p class="index__profile__phone">{{ getUser.phone }}</p>
                 <div class="index__profile__dostup">
                     <h3 class="profile__dostup__title">Ваш уровень доступа: {{ getUser.role_name }}</h3>
                     <p class="profile__dostup__text">{{ getUser.role_info }}</p>
@@ -36,28 +36,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td scope="row" data-label="#">1</td>
-                        <td data-label="Товар">Диски</td>
-                        <td data-label="Статус заказа">Оформлен</td>
-                        <td data-label="Дата доставки">15.02.2022, 15:30</td>
-                        <td data-label="Сотрудник">Демошенков С.М.</td>
-                        <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
-                    </tr>
-                    <tr>
-                        <td scope="row" data-label="#">1</td>
-                        <td data-label="Товар">Диски</td>
-                        <td data-label="Статус заказа">Оформлен</td>
-                        <td data-label="Дата доставки">15.02.2022, 15:30</td>
-                        <td data-label="Сотрудник">Демошенков С.М.</td>
-                        <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
-                    </tr>
-                    <tr>
-                        <td scope="row" data-label="#">1</td>
-                        <td data-label="Товар">Диски</td>
-                        <td data-label="Статус заказа">Оформлен</td>
-                        <td data-label="Дата доставки">15.02.2022, 15:30</td>
-                        <td data-label="Сотрудник">Демошенков С.М.</td>
+                    <tr v-for="order in getOrder" :key="order.id">
+                        <td scope="row" data-label="#">{{ order.id }}</td>
+                        <td data-label="Товар">{{ order.title }}</td>
+                        <td data-label="Статус заказа">{{ order.status_name }}</td>
+                        <td data-label="Дата доставки">{{ order.created_at }}</td>
+                        <td data-label="Сотрудник">{{ order.employee_firstName }}</td>
                         <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
                     </tr>
                 </tbody>
@@ -69,7 +53,7 @@
 import { mapGetters } from 'vuex';
 export default {
     computed: {
-        ...mapGetters(['getUser'])
+        ...mapGetters(['getUser', 'getOrder'])
     },
 
 

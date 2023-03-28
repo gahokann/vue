@@ -110,7 +110,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["setUser", "logout"]),
+        ...mapActions(["setUser", "logout", "setOrder"]),
 
         logOut() {
             this.logout();
@@ -122,16 +122,8 @@ export default {
     },
 
     async created() {
-        // try {
-            // const data = (await this.$api.user.userInfo()).data;
-            this.setUser();
-        // } catch (error) {
-            // // console.log(error)
-            // this.logOut()
-            // this.$router.push({name: 'main'})
-        // }
-
-        
+        this.setUser();
+        this.setOrder();
     }
 };
 </script>

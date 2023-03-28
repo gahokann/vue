@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 export default (api) => {
     return {
         actions: {
+
             // Работа из api
             async setUser({commit}) {
                 await api.user.userInfo()
@@ -16,13 +17,16 @@ export default (api) => {
                     commit('LOGOUT')
                     router.push({ name: 'main' })
                 })
+            },
 
-
-                // commit('SET_USER', user)
-                // commit("SET_ROLE", user.role_id)
-                
-
-                // console.log(user)
+            async setOrder({commit}) {
+                await api.order.orderUser()
+                .then(res => {
+                    commit('SET_ORDER' ,res.data)
+                }).catch(() => {
+                    commit('LOGOUT')
+                    router.push({ name: 'main' })
+                })
             },
             logout({ commit }) {
                 commit("LOGOUT");
@@ -34,14 +38,21 @@ export default (api) => {
             SET_USER(state, user) {
                 state.user = user
             },
+
+            SET_ORDER(state, orders) {
+                state.orders = orders
+            },
+
             SET_ROLE(state, role_id) {
                 // localStorage.setItem("role_id", role_id),
                 state.role_id = role_id;
             },
+
             LOGOUT(state) {
                 localStorage.removeItem("token");
                 localStorage.removeItem("role_id");
                 state.user = "";
+                state.order = "";
                 state.role_id = "";
             },
         },
@@ -50,12 +61,18 @@ export default (api) => {
             // переменные
             user: [],
             role_id: "",
+            orders: [],
         },
 
         getters: {
             // получение из переменных
             getUser(state) {
                 return state.user
+            },
+
+
+            getOrder(state) {
+                return state.orders
             },
 
             isAdmin: (state) => state.role_id > 1,
