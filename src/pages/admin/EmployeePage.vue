@@ -15,44 +15,40 @@
                 <div class="employee__page__role">
                     <h5 class="page__role__title">Генеральный директор</h5>
                     <div class="page__role__items">
+                        <div class="page__role__item" v-for="employee in getEmployees" :key="employee.id">
+                            <div >
+                                <img src="../../assets/img/1.jpg" alt="" class="page__role__item__img">
+                                <p class="page__role__item__fio">Демошенков С.М.</p>
+                                <p class="page__role__item__roleName">Генеральный Директор</p>
+                                <router-link :to="{ name: 'adminPerson' }" class="btn btn-orange btn__employee">Открыть</router-link>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="page__role__title">Главный бухгалтер</h5>
+                    <div class="page__role__items">
                         <div class="page__role__item">
                             <img src="../../assets/img/1.jpg" alt="" class="page__role__item__img">
                             <p class="page__role__item__fio">Демошенков С.М.</p>
                             <p class="page__role__item__roleName">Генеральный Директор</p>
                             <router-link :to="{ name: 'adminPerson' }" class="btn btn-orange btn__employee">Открыть</router-link>
                         </div>
-                        <div class="page__role__item">
-                            <img src="../../assets/img/1.jpg" alt="" class="page__role__item__img">
-                            <p class="page__role__item__fio">Демошенков С.М.</p>
-                            <p class="page__role__item__roleName">Генеральный Директор</p>
-                            <a class="btn btn-orange btn__employee">Открыть</a>
-                        </div>
-                        <div class="page__role__item">
-                            <img src="../../assets/img/1.jpg" alt="" class="page__role__item__img">
-                            <p class="page__role__item__fio">Демошенков С.М.</p>
-                            <p class="page__role__item__roleName">Генеральный Директор</p>
-                            <a class="btn btn-orange btn__employee">Открыть</a>
-                        </div>
                     </div>
-                    <h5 class="page__role__title">Генеральный </h5>
+                    <h5 class="page__role__title">Бухгалтер</h5>
                     <div class="page__role__items">
                         <div class="page__role__item">
                             <img src="../../assets/img/1.jpg" alt="" class="page__role__item__img">
                             <p class="page__role__item__fio">Демошенков С.М.</p>
                             <p class="page__role__item__roleName">Генеральный Директор</p>
-                            <a class="btn btn-orange btn__employee">Открыть</a>
+                            <router-link :to="{ name: 'adminPerson' }" class="btn btn-orange btn__employee">Открыть</router-link>
                         </div>
+                    </div>
+                    <h5 class="page__role__title">Менеджер</h5>
+                    <div class="page__role__items">
                         <div class="page__role__item">
                             <img src="../../assets/img/1.jpg" alt="" class="page__role__item__img">
                             <p class="page__role__item__fio">Демошенков С.М.</p>
                             <p class="page__role__item__roleName">Генеральный Директор</p>
-                            <a class="btn btn-orange btn__employee">Открыть</a>
-                        </div>
-                        <div class="page__role__item">
-                            <img src="../../assets/img/1.jpg" alt="" class="page__role__item__img">
-                            <p class="page__role__item__fio">Демошенков С.М.</p>
-                            <p class="page__role__item__roleName">Генеральный Директор</p>
-                            <a class="btn btn-orange btn__employee">Открыть</a>
+                            <router-link :to="{ name: 'adminPerson' }" class="btn btn-orange btn__employee">Открыть</router-link>
                         </div>
                     </div>
                 </div>
@@ -61,8 +57,19 @@
     </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-    
+    methods: {
+        ...mapActions(['allRoles', 'employees'])
+    },
+    computed: {
+        ...mapGetters(['getRoles', 'getEmployees'])
+    },
+    created() {
+        this.allRoles()
+        this.employees()
+    }
 }
 </script>
 <style lang="">

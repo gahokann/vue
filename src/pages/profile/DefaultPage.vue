@@ -1,21 +1,23 @@
 <template lang="">
     <div class="page">
         <nav class="nav__profile__items">
-            <router-link
-                :to="{ name: 'main' }"
-                class="nav__profile__title__link"
-            >
+            
                 <div class="nav__profile__item">
-                    <img
-                        src="../../assets/img/logo.png"
-                        alt=""
-                        class="nav__profile__logo"
-                    />
-                    <p class="nav__profile__title">
-                        Первая Снабженческая Компания
-                    </p>
+                    <!-- <router-link
+                        :to="{ name: 'main' }"
+                        class="nav__profile__title__link"
+                    > -->
+                        <img
+                            src="../../assets/img/logo.png"
+                            alt=""
+                            class="nav__profile__logo"
+                        />
+                        <p class="nav__profile__title">
+                            Первая Снабженческая Компания
+                        </p>
+                    <!-- </router-link> -->
                 </div>
-            </router-link>
+            
             <div class="nav__profile__item">
                 <router-link
                     :to="{ name: 'profileMain' }"
@@ -82,6 +84,11 @@
         <div class="profile__content__items">
             <sidebar-profile></sidebar-profile>
             <div class="profile__content">
+                <button class="btn btn-outline-success link__back" @click="$router.go(-1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                </button>
                 <transition name="fade" mode="out-in">
                     <router-view></router-view>
                 </transition>

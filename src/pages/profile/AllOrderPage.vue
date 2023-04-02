@@ -26,13 +26,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="order in allOrders" :key="order.id">
+                    <tr v-for="order in getOrder" :key="order.id">
                         <td scope="row" data-label="#">{{ order.id }}</td>
                         <td data-label="Товар">{{ order.title }}</td>
                         <td data-label="Статус заказа">{{ order.status_name }}</td>
-                        <td data-label="Дата доставки">{{ order.last_deleviryDate }}</td>
-                        <td data-label="Сотрудник">Демошенков С.М.</td>
-                        <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
+                        <td data-label="Дата заказа">{{ order.created_at }}</td>
+                        <td data-label="Сотрудник" >
+                            <p v-if="order.employee_firstName == null">Не назначен</p>
+                            <p v-if="order.employee_firstName != null">{{ order.employee_firstName }}</p>
+                        </td>
+                        <td data-label="">
+                            <a href="#" class='btn btn-orange'>Открыть</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -41,16 +46,15 @@
 </template>
 <script>
 
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'allOrderPage',
     methods: {
     },
     computed: {
-    },
-    created() {
-        
-    },
-
+        ...mapGetters(['getOrder'])
+    }
 }
 </script>
 <style lang="">

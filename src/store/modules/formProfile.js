@@ -11,6 +11,7 @@ export default (api) => {
                 await api.auth.auth(user)
                 .then(res => {
                     commit("SET_TOKEN", res.data.token)
+                    localStorage.setItem('number__column', res.data.number__column)
                     commit("SET_ERROR", "")
                     router.push({ name: 'profileMain' })
                 })
@@ -97,8 +98,9 @@ export default (api) => {
 
             async companyAdd({ commit, dispatch }, data) {
                 await api.user.companyAdd(data)
-                .then(res => {
-                    commit('SET_SUCCESS', res.data.message)
+                await api.user.companyAdd(data)
+                .then(() => {
+                    // commit('SET_SUCCESS', res.data.message)
                     dispatch('setUser');
 
                     setTimeout(() => {
@@ -111,8 +113,9 @@ export default (api) => {
                 })
             },
 
-            logout({ commit }) {
+            logout({ commit, dispatch }) {
                 commit("LOGOUT");
+                dispatch("LOGOUT")
             },
         },
 
@@ -138,8 +141,12 @@ export default (api) => {
 
             LOGOUT(state) {
                 localStorage.removeItem("token");
-                localStorage.removeItem("role_id");
+                localStorage.removeItem("number__column");
                 state.token = "";
+                state.orders = "";
+                state.users = "";
+                state.roles = "";
+                state.employee = "";
             },
         },
 

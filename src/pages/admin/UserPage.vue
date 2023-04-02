@@ -26,14 +26,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-label="#">1</td>
-                        <td data-label="Фамилия">Демошенков</td>
-                        <td data-label="Имя">Сергей</td>
-                        <td data-label="Отчество">Михайлович</td>
-                        <td data-label="Почта">1@snab.ru</td>
-                        <td data-label="Номер телефона">+79778598026</td>
-                        <td data-label="Компания">ООО 'ПСК'</td>
+                    <tr v-for="user in getUsers" :key="user.id">
+                        <td data-label="#">{{ user.id }}</td>
+                        <td data-label="Фамилия">{{ user.first_name }}</td>
+                        <td data-label="Имя">{{ user.second_name }}</td>
+                        <td data-label="Отчество">{{ user.last_name }}</td>
+                        <td data-label="Почта">{{ user.email }}</td>
+                        <td data-label="Номер телефона">{{ user.phone }}</td>
+                        <td data-label="Компания">
+                            <p v-if="user.company == null">Отсутствует</p>
+                            <p v-if="user.company != null">{{ user.company.name }}</p>
+                            
+                        </td>
                         <td data-label=""><router-link :to="{name: 'adminClientPerson'}" class='btn btn-orange'>Открыть</router-link></td>
                     </tr>
                     
@@ -43,8 +47,18 @@
     </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-    
+    methods: {
+        ...mapActions(['allUsers']),
+    },
+    computed: {
+        ...mapGetters(['getUsers'])
+    },
+    created() {
+        this.allUsers()
+    }
 }
 </script>
 <style lang="">

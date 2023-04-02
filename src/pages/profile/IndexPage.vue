@@ -41,7 +41,10 @@
                         <td data-label="Товар">{{ order.title }}</td>
                         <td data-label="Статус заказа">{{ order.status_name }}</td>
                         <td data-label="Дата доставки">{{ order.created_at }}</td>
-                        <td data-label="Сотрудник">{{ order.employee_firstName }}</td>
+                        <td data-label="Сотрудник" >
+                            <p v-if="order.employee_firstName == null">Не назначен</p>
+                            <p v-if="order.employee_firstName != null">{{ order.employee_firstName }}</p>
+                        </td>
                         <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
                     </tr>
                 </tbody>

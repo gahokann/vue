@@ -79,11 +79,25 @@ export default new VueRouter ({
                     path: '/allOrders',
                     name: 'profileAllOrders',
                     component: ProfileAllOrderPage,
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isAuthenticated && store.getters.isСustomer) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                 },
                 {
                     path: '/activeOrders',
                     name: 'profileActiveOrders',
                     component: ProfileActiveOrderPage,
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isAuthenticated && store.getters.isСustomer) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                 },
                 {
                     path: '/order',
@@ -103,7 +117,7 @@ export default new VueRouter ({
             name: 'admin',
             component: ProfileDefaultPage,
             beforeEnter: (to, from, next) => {
-                if(store.getters.isAdmin && store.getters.isAuthenticated) {
+                if(store.getters.isEmployee && store.getters.isAuthenticated) {
                     next()
                 } else {
                     next({name: 'profileMain'})
@@ -114,11 +128,25 @@ export default new VueRouter ({
                 {
                     path: '/admin/users',
                     name: 'adminUsers',
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isChief) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                     component: AdminUsers,
                 },
                 {
                     path: '/admin/employee',
                     name: 'adminEmployee',
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isChief) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                     component: AdminEmployee,
                 },
                 {
@@ -129,21 +157,49 @@ export default new VueRouter ({
                 {
                     path: '/admin/company',
                     name: 'adminCompany',
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isChief) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                     component: AdminCompany,
                 },
                 {
                     path: '/admin/partners',
                     name: 'adminPartners',
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isChief) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                     component: AdminPartner,
                 },
                 {
                     path: '/admin/person',
                     name: 'adminPerson',
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isChief) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                     component: AdminPerson,
                 },
                 {
                     path: '/admin/personClient',
                     name: 'adminClientPerson',
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isChief) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                     component: AdminClientPerson,
                 },
             ]

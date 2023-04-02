@@ -3,15 +3,20 @@ import Vuex from 'vuex'
 import api from '../api/index'
 
 
-import user from './modules/user'
-import formProfile from './modules/formProfile'
+
+import userModule from './modules/user'
+import formProfileModule from './modules/formProfile'
+import orderModule from './modules/order'
+import adminModule from './modules/admin'
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
-        user: user(api), 
-        formProfile: formProfile(api),
+        userModule: userModule(api), 
+        formProfileModule: formProfileModule(api),
+        orderModule: orderModule(api),
+        adminModule: adminModule(api),
     }
 })

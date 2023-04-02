@@ -1,7 +1,7 @@
 <template lang="">
     <div name="sidebar" class="sidebar__profile" :class="burgerProfile">
             <p class="nav__profile__role">
-                Уровень доступа: Пользователь
+                Уровень доступа: {{ getUser.role_name }}
             </p>
             <div @click="burgerProfile.active = !burgerProfile.active" id="burger__profile" class="sidebar__profile__burger" :class="burgerProfile">
                 <span></span>
@@ -10,7 +10,7 @@
             <nav class="sidebar__profile__nav nav__mobile">
                 <div class="profile__mobile">
                 <h5 class="sidebar__profile__nav__title">Профиль</h5>
-                <div @click="burgerProfile.active = !burgerProfile.active" id="burger__profile" class="sidebar__profile__nav__link burger" :class="burgerProfile" v-if="isAdmin">
+                <div @click="burgerProfile.active = !burgerProfile.active" id="burger__profile" class="sidebar__profile__nav__link burger" :class="burgerProfile" v-if="isEmployee">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                     </svg>
@@ -75,6 +75,7 @@
                     </svg>
                     <p class="sidebar__profile__nav__link__text">Для компании</p>
                 </router-link>
+                <div v-if="isСustomer">
                 <div class="separator"></div>
                 <h5 class="sidebar__profile__nav__title">Заказы</h5>
                 <router-link :to="{ name: 'profileAllOrders' }" class="sidebar__profile__nav__link">
@@ -83,17 +84,17 @@
 </svg>
                     <p class="sidebar__profile__nav__link__text">Все заказы</p>
                 </router-link>
-                <router-link :to="{name: 'profileActiveOrders'}" class="sidebar__profile__nav__link">
+                <!-- <router-link :to="{name: 'profileActiveOrders'}" class="sidebar__profile__nav__link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
 </svg>
                     <p class="sidebar__profile__nav__link__text">Активные заказы</p>
-                </router-link>
-                
+                </router-link> -->
+            </div>
                 
             </div>
                 <!-- !ADMINS -->
-                <div class="admin__mobible" v-if="isAdmin">
+                <div class="admin__mobible" v-if="isEmployee">
                     <div class="separator"></div>
                     
                 <h5 class="sidebar__profile__nav__title">Панель управления</h5>
@@ -103,13 +104,13 @@
 </svg>
                     <p class="sidebar__profile__nav__link__text">Главная</p>
                 </router-link> -->
-                <router-link :to="{name: 'adminUsers'}" class="sidebar__profile__nav__link ">
+                <router-link :to="{name: 'adminUsers'}" class="sidebar__profile__nav__link" v-if="isChief">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
   <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
 </svg>
                     <p class="sidebar__profile__nav__link__text">Пользователи</p>
                 </router-link>
-                <router-link :to="{name: 'adminEmployee'}" class="sidebar__profile__nav__link ">
+                <router-link :to="{name: 'adminEmployee'}" class="sidebar__profile__nav__link " v-if="isChief">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
   <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
 </svg>
@@ -122,14 +123,14 @@
 </svg>
                     <p class="sidebar__profile__nav__link__text">Заказы</p>
                 </router-link>
-                <router-link :to="{name: 'adminCompany'}" class="sidebar__profile__nav__link ">
+                <router-link :to="{name: 'adminCompany'}" class="sidebar__profile__nav__link " v-if="isChief">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
   <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
   <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
 </svg>
                     <p class="sidebar__profile__nav__link__text">Компании</p>
                 </router-link>
-                <router-link :to="{name: 'adminPartners'}" class="sidebar__profile__nav__link ">
+                <router-link :to="{name: 'adminPartners'}" class="sidebar__profile__nav__link " v-if="isChief">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-p-circle" viewBox="0 0 16 16">
   <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM5.5 4.002h2.962C10.045 4.002 11 5.104 11 6.586c0 1.494-.967 2.578-2.55 2.578H6.784V12H5.5V4.002Zm2.77 4.072c.893 0 1.419-.545 1.419-1.488s-.526-1.482-1.42-1.482H6.778v2.97H8.27Z"/>
 </svg>
@@ -151,7 +152,7 @@ export default {
     },
     
     computed: {
-        ...mapGetters(["isAdmin"]),
+        ...mapGetters(["isEmployee", "isChief", "isСustomer", "getUser"]),
     }
 }
 </script>

@@ -826,9 +826,14 @@ p {
 
 .page__role__items {
     padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+}
+
+.page__role__items:last-child {
+    padding-bottom: 0;
 }
 
 .page__role__item {
@@ -1099,4 +1104,10 @@ p {
     font-weight: 400;
     font-size: 18px;
     padding-top: 20px;
+}
+
+.link__back {
+    border-left: 0;
+    border-top: 0;
+    border-radius: 0 0 10px 0;
 }
