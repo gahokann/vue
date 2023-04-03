@@ -6,5 +6,6 @@ export default function (instance) {
         createOrder(payload) {
             return instance.post("order/store", payload);
         },
+        
     };
 }

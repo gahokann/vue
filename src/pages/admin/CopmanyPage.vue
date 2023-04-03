@@ -11,7 +11,7 @@
             <div class="index__profile__orders__info">
                 <h3 class="index__profile__order__title">Компании</h3>
             </div>
-            <table class="table orderPageTable">
+            <table class="table companyTablePage">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -23,36 +23,65 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td scope="row" data-label="#">1</td>
-                        <td data-label="Название компании">ООО "ПСК"</td>
-                        <td data-label="Дата регистрации">15.02.2022, 15:30</td>
-                        <td data-label="Представитель">Демошенков С.М.</td>
-                        <td data-label="Статус компании">Ожидает рассмотрения</td>
+                    <tr v-for="company in getCompanies" :key="company.id">
+                        <td scope="row" data-label="#">{{ company.id }}</td>
+                        <td data-label="Название компании">{{ company.name }}</td>
+                        <td data-label="Дата регистрации">{{ company.created_at }}</td>
+                        <td data-label="Представитель">{{ company.user_firstName }}</td>
+                        <td data-label="Статус компании">{{ company.status_name }}</td>
                         <td data-label="" class="btn__table__partner">
-                            <a @click="isModalInfoCompany.active = !isModalInfoCompany.active" class='btn btn-orange'>Просмотреть</a>
+                            <a @click="setModalid(company), isModalInfoCompany.active = !isModalInfoCompany.active" class='btn btn-orange'>Просмотреть</a>
                         </td>
                     </tr>
+                    
                 </tbody>
             </table>
-            <ModalInfoCompany :class="isModalInfoCompany" @close="isModalInfoCompany.active = false" ></ModalInfoCompany>
+            <ModalInfoCompany :class="isModalInfoCompany" @close="isModalInfoCompany.active = false" 
+            :cid = company.id
+            :nameCompany = company.name
+            :dataReg = company.created_at
+            :first_name = company.user_firstName
+            :second_name = company.user_secondName
+            :last_name = company.user_lastName
+            :phone = phone
+            :status = company.status_name
+            :portal = company.link_web
+            :job = company.description
+            ></ModalInfoCompany>
         </div>
     </div>
 </template>
 <script>
 import ModalInfoCompany from '@/components/ModalInfoCompany.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     components: {
         ModalInfoCompany
+    },
+    
+    computed: {
+        ...mapGetters(['getCompanies'])
+    },
+
+    created() {
+        this.setCompanyAll()
     },
     data() {
         return {
             isModalInfoCompany: {
                 active: false,
             },
+            company: [],
+            phone: "+78885552222"
         }
-    }
+    },
+    methods: {
+        ...mapActions(['setCompanyAll']),
+        setModalid(id) {
+            this.company = id
+        }
+    },
 }
 </script>
 <style lang="">

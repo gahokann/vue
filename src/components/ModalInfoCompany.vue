@@ -3,20 +3,20 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Компания: {{ title }}</h5>
+                    <h5 class="modal-title">Компания: 111 IDD {{ companyID }}</h5>
                     <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                        <p class="modal__company__name"><span class="bold">Название компании</span>: ООО "ПСК"</p>
-                        <p class="modal__company__date"><span class="bold">Дата регистрации</span>: 15.02.2022, 15:30</p>
-                        <p class="modal__company__fio"><span class="bold">Представитель компании</span>{{ `: Демошенков Сергей Михайлович` }}</p>
-                        <p class="modal__company__fio"><span class="bold">Номер телефона</span>{{ `: +79778598026` }}</p>
-                        <p class="modal__company__status"><span class="bold">Статус</span>: Ожидает рассмотрения</p>
-                        <p class="modal__company__portal"><span class="bold">Интернет-портал</span>: www.infosnto.ru</p>
-                        <p class="modal__company__desc"><span class="bold">Деятельность компании</span>: Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque a quam deleniti impedit enim? In cupiditate fugit temporibus est totam earum? Magni facere quo officiis eveniet ex commodi sit doloremque.</p>
+                        <p class="modal__company__name"><span class="bold">Название компании</span>: {{ nameCompany }}</p>
+                        <p class="modal__company__date"><span class="bold">Дата регистрации</span>: {{ dataReg }}</p>
+                        <p class="modal__company__fio"><span class="bold">Представитель компании</span>: {{ `${first_name} ${second_name} ${last_name}` }}</p>
+                        <p class="modal__company__fio"><span class="bold">Номер телефона</span>: {{ phone }}</p>
+                        <p class="modal__company__status"><span class="bold">Статус</span>: {{ status }}</p>
+                        <p class="modal__company__portal"><span class="bold">Интернет-портал</span>: {{ portal }}</p>
+                        <p class="modal__company__desc"><span class="bold">Деятельность компании</span>: {{ job }}</p>
                         <div class="btns__company__status">
                             <button class="btn btn-success">Одобрить</button>
-                            <button class="btn btn-danger" style="margin-left: 10px">Одобрить</button>
+                            <button class="btn btn-danger" style="margin-left: 10px">Отклонить</button>
                         </div>
 
                 </div>
@@ -35,20 +35,40 @@ export default {
         }
     },
     props: {
-        firstName: {
-            type: String,
-        },
-        secondName: {
-            type: String,
-        },
-        lastName: {
-            type: String,
+        cid: {
+            type: Number
         },
         nameCompany: {
             type: String,
         },
-        dateReg: {
-            type: Date,
+        dataReg: {
+            type: String
+        },
+        first_name: {
+            type: String,
+        },
+        second_name: {
+            type: String,
+        },
+        last_name: {
+            type: String,
+        },
+        phone: {
+            type: String,
+        },
+        status: {
+            type: String
+        },
+        portal: {
+            type: String,
+        },
+        job: {
+            type: String
+        }
+    },
+    data() {
+        return {
+            companyID: this.cid
         }
     }
 }

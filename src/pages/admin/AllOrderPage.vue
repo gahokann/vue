@@ -12,7 +12,7 @@
                 <h3 class="index__profile__order__title">Все заказы</h3>
                 
             </div>
-            <table class="table orderPageTable">
+            <table class="table orderAllPageTable">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -26,35 +26,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td scope="row" data-label="#">1</td>
-                        <td data-label="Товар">Диски</td>
-                        <td data-label="Статус заказа">Оформлен</td>
-                        <td data-label="Дата доставки">15.02.2022, 15:30</td>
-                        <td data-label="Заказчик">Демошенков С.М.</td>
-                        <td data-label="Сотрудник">Демошенков С.М.</td>
-                        <td data-label="Компания">ООО "ПСК"</td>
-                        <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
-                    </tr>
-                    <tr>
-                        <td scope="row" data-label="#">1</td>
-                        <td data-label="Товар">Диски</td>
-                        <td data-label="Статус заказа">Оформлен</td>
-                        <td data-label="Дата доставки">15.02.2022, 15:30</td>
-                        <td data-label="Заказчик">Демошенков С.М.</td>
-                        <td data-label="Сотрудник">Демошенков С.М.</td>
-                        <td data-label="Компания">ООО "ПСК"</td>
-                        <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
-                    </tr>
-                    <tr>
-                        <td scope="row" data-label="#">1</td>
-                        <td data-label="Товар">Диски</td>
-                        <td data-label="Статус заказа">Оформлен</td>
-                        <td data-label="Дата доставки">15.02.2022, 15:30</td>
-                        <td data-label="Заказчик">Демошенков С.М.</td>
-                        <td data-label="Сотрудник">Демошенков С.М.</td>
-                        <td data-label="Компания">ООО "ПСК"</td>
-                        
+                    <tr v-for="order in getOrders" :key="order.id">
+                        <td scope="row" data-label="#">{{ order.id }}</td>
+                        <td data-label="Товар">{{ order.title }}</td>
+                        <td data-label="Статус заказа">{{ order.status_name }}</td>
+                        <td data-label="Дата доставки">
+                            <p v-if="order.last_deleviryDate == null">Не назначено</p>
+                            <p v-if="order.last_deleviryDate != null">{{ order.last_deleviryDate }}</p>
+                        </td>
+                        <td data-label="Заказчик">{{ order.user_firstName }}</td>
+                        <td data-label="Сотрудник">
+                            <p v-if="order.employee_id == null">Не назначен</p>
+                            <p v-if="order.employee_id != null">{{ order.employee_firstName }}</p>
+                            
+                        </td>
+                        <td data-label="Компания">{{ order.company_name }}</td>
                         <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
                     </tr>
                 </tbody>
@@ -63,8 +49,18 @@
     </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-    
+    methods: {
+        ...mapActions(['setOrderAll'])
+    },
+    computed: {
+        ...mapGetters(['getOrders'])
+    },
+    created() {
+        this.setOrderAll()
+    }
 }
 </script>
 <style lang="">

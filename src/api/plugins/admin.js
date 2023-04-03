@@ -11,6 +11,14 @@ export default function(instance) {
         roles() {
             return instance.get('admin/roles')
         },
+
+        orderAll() {
+            return instance.get('admin/orderAll')
+        },
+
+        companyAll() {
+            return instance.get('admin/companyAll')
+        }
         
     }
   }

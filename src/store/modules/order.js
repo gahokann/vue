@@ -27,6 +27,7 @@ export default (api) => {
                     router.push({ name: 'main' })
                 })
             },
+            
         },
 
         mutations: {

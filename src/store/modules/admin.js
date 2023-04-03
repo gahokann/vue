@@ -33,6 +33,24 @@ export default (api) => {
                     commit("SET_ERROR", err.response.data.message)
                 });
             },
+
+            async setOrderAll({commit}) {
+                await api.admin.orderAll()
+                .then(res => {
+                    commit('SET_ORDER' ,res.data)
+                }).catch(err => {
+                    commit("SET_ERROR", err.response.data.message)
+                })
+            },
+
+            async setCompanyAll({commit}) {
+                await api.admin.companyAll()
+                .then(res => {
+                    commit('SET_COMPANY' ,res.data)
+                }).catch(err => {
+                    commit("SET_ERROR", err.response.data.message)
+                })
+            },
         },
 
         mutations: {
@@ -46,6 +64,14 @@ export default (api) => {
 
             SET_EMPLOYEE(state, employee) {
                 state.employees = employee
+            },
+
+            SET_ORDER(state, orders) {
+                state.orders = orders
+            },
+
+            SET_COMPANY(state, companies) {
+                state.companies = companies
             }
         },
 
@@ -53,6 +79,8 @@ export default (api) => {
             users: [],
             infoRoles: [],
             employees: [],
+            orders: [],
+            companies: []
         },
 
         getters: {
@@ -66,6 +94,14 @@ export default (api) => {
 
             getEmployees(state) {
                 return state.employees
+            },
+
+            getOrders(state) {
+                return state.orders
+            },
+            
+            getCompanies(state) {
+                return state.companies
             }
         },
     };
