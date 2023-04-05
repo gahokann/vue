@@ -17,6 +17,14 @@ export default (api) => {
                     router.push({ name: 'main' })
                 })
             },
+
+            nullStatus({commit}) {
+                commit('NULLSTATUS')
+            },
+
+            nullHttpCode({commit}) {
+                commit('NULLHTTP')
+            }
         },
 
         mutations: {
@@ -31,22 +39,48 @@ export default (api) => {
             },
 
             LOGOUT(state) {
-                localStorage.removeItem("token");
+                localStorage.removeItem("number__column"),
                 state.user = "";
                 state.role_id = "";
             },
+
+            SET_STATUS(state, status) {
+                state.status = status
+            },
+
+            SET_HTTPCODE(state, httpcode) {
+                state.http_code = httpcode
+            },
+
+            NULLHTTP(state, httpcode) {
+                state.http_code = httpcode
+            },
+
+            NULLSTATUS(state) {
+                state.status = null
+            }
         },
 
         state: {
             // переменные
             user: [],
             role_id: localStorage.getItem('number__column'),
+            status: null,
+            http_code: null,
         },
 
         getters: {
             // получение из переменных
             getUser(state) {
                 return state.user
+            },
+
+            getStatus(state) {
+                return state.status
+            },
+
+            getHttpCode(state) {
+                return state.http_code
             },
 
             isUser: (state) => state.role_id == 1,

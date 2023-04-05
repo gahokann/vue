@@ -3,15 +3,15 @@
         <div class="user__table__admin allOrderPage">
             <div class="index__profile__orders__info">
                 <h3 class="index__profile__order__title">
-                    Заказ: #1234
+                    Заказ: #{{ getOrderUser.id }}
                 </h3>
             </div>
             <div class="order__block">
                 <div class="order__block__info__items">
                     <div class="order__block__info__item">
-                        <h3 class="info__item__title">Диски отрезные</h3>
-                        <p class="info__item__date">25.01.2023, 15:20</p>
-                        <p class="order__block__info__company">Компания: ООО "ПСК"</p>
+                        <h3 class="info__item__title">{{ getOrderUser.title }}</h3>
+                        <p class="info__item__date">{{ getOrderUser.created_at }}</p>
+                        <p class="order__block__info__company">Компания: {{ getOrderUser.company.name }}</p>
                     </div>
                         <div class="order__block__info__item">
                             <div @click="isModalInfoEmployeeOpen.active = !isModalInfoEmployeeOpen.active" class="sotr">
@@ -28,11 +28,10 @@
                         </div>
                 </div>
                 <div class="order__block__info">
-                    <p class="order__block__info__column">Количество продукта: 15штук</p>
-                    
-                    <p class="order__block__info__datePred">Предварительная дата доставки: 25.01.2024</p>
-                    <p class="order__block__info__date">Дата доставки: 25.01.2024</p>
-                    <p class="order__block__info__description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora ullam cupiditate omnis illum similique quo ut odit aperiam, qui a fugiat magni consequatur vitae sunt inventore, mollitia temporibus! Rerum, reiciendis?Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo porro corrupti quos error saepe veritatis similique tempore ut culpa in, enim asperiores quasi dolorem, dolores delectus perferendis sunt. Architecto, amet.</p>
+                    <p class="order__block__info__column">Количество продукта: {{ getOrderUser.quantity }}штук</p>
+                    <p class="order__block__info__datePred">Предварительная дата доставки: {{ getOrderUser.first_deleviryDate  }}</p>
+                    <p class="order__block__info__date">Дата доставки: {{ getOrderUser.last_deleviryDate }}</p>
+                    <p class="order__block__info__description">{{ getOrderUser.information }}</p>
                     <p class="order__block__info__img">Картинка: Отсутствует</p>
                 </div>
             </div>
@@ -54,6 +53,7 @@
 <script>
 import ModalChangeOrder from '@/components/ModalChangeOrder.vue';
 import ModalInfoEmployee from '@/components/ModalInfoEmployee.vue';
+import { mapActions, mapGetters } from 'vuex';
 export default {
     components: {
         ModalChangeOrder,
@@ -75,8 +75,18 @@ export default {
                 roleName: "Модератор",
                 email: "info@1snab.ru",
                 phone: "+79778598026"
-            }
+            }, 
+            orderId: this.$route.params.id
         }
+    },
+    computed: {
+        ...mapGetters(['getOrderUser'])
+    },
+    methods: {
+        ...mapActions(['setOrderUser'])
+    },
+    created() {
+        this.setOrderUser(this.orderId)
     }
 }
 </script>

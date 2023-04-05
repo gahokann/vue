@@ -35,15 +35,23 @@
                 <button class="btn btn-orange auth__btn">Подтвердить</button>
             </form>
         </div>
+        <ToastMessage :class="isToasts" class="toast__message" @close="isToasts.active = false"
+            :title = toastTitle
+            :description = getStatus
+        ></ToastMessage>
     </div>
 </template>
 <script>
 import { validationMixin } from 'vuelidate'
-import { mapActions } from 'vuex'
+import { mapActions,mapGetters } from 'vuex'
 import { required } from 'vuelidate/lib/validators'
+import ToastMessage from '@/components/ToastMessage.vue';
 
 export default {
     mixins: [validationMixin],
+    components: {
+        ToastMessage,
+    },
     data() {
         return {
             form: {
@@ -52,8 +60,15 @@ export default {
                 first_deleviryDate: '',
                 photo: '',
                 information: '',
-            }
+            },
+            isToasts: {
+                active: false,
+            },
+            toastTitle: 'Оформление заказа',
         }
+    },
+    computed: {
+        ...mapGetters(['getStatus'])
     },
     validations: {
         form: {
@@ -68,6 +83,9 @@ export default {
             this.$v.form.$touch()
             if(!this.$v.form.$error) {
                 this.createOrder(this.form)
+                setTimeout(() => {
+                    this.isToasts.active = true
+                }, 1500);
             }
         }
     }

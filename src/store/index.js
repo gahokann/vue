@@ -11,12 +11,16 @@ import adminModule from './modules/admin'
 
 
 Vue.use(Vuex)
-
 export default new Vuex.Store({
     modules: {
         userModule: userModule(api), 
         formProfileModule: formProfileModule(api),
         orderModule: orderModule(api),
         adminModule: adminModule(api),
-    }
+    },
+    actions: {
+        logout({commit}) {
+            commit('LOGOUT')
+        }
+    },
 })

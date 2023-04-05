@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Компания: 111 IDD {{ companyID }}</h5>
+                    <h5 class="modal-title">Компания: {{ nameCompany }}</h5>
                     <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -15,10 +15,11 @@
                         <p class="modal__company__portal"><span class="bold">Интернет-портал</span>: {{ portal }}</p>
                         <p class="modal__company__desc"><span class="bold">Деятельность компании</span>: {{ job }}</p>
                         <div class="btns__company__status">
-                            <button class="btn btn-success">Одобрить</button>
-                            <button class="btn btn-danger" style="margin-left: 10px">Отклонить</button>
+                            <button @click="statusCompany(cid, 2)" v-if="status_id == 1 || status_id == 3" class="btn btn-success">Одобрить</button>
+                            <button @click="statusCompany(cid, 3)" v-if="status_id == 1" class="btn btn-danger" style="margin-left: 10px">Отклонить</button>
+                            <button @click="statusCompany(cid, 4)" v-if="status_id == 2" class="btn btn-danger" style="margin-left: 10px">Заблокировать</button>
+                            <button @click="statusCompany(cid, 2)" v-if="status_id == 4" class="btn btn-success" style="margin-left: 10px">Разблокировать</button>
                         </div>
-
                 </div>
                 <div class="modal-footer">
                     <button @click="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -28,12 +29,9 @@
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
+
 export default {
-    methods: {
-        closeModal() {
-            this.$emit('close')
-        }
-    },
     props: {
         cid: {
             type: Number
@@ -64,11 +62,25 @@ export default {
         },
         job: {
             type: String
+        },
+        status_id: {
+            type: Number
         }
     },
-    data() {
-        return {
-            companyID: this.cid
+    methods: {
+        closeModal() {
+            this.$emit('close')
+        },
+
+        ...mapActions(['companyStatus']),
+
+        statusCompany(id, status) {
+            this.companyStatus({ id, status })
+            this.$emit('close')
+            setTimeout(() => {
+                this.$emit('toast')
+            }, 1500);
+            
         }
     }
 }

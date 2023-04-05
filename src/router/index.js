@@ -100,7 +100,7 @@ export default new VueRouter ({
                     },
                 },
                 {
-                    path: '/order',
+                    path: '/order/:id',
                     name: 'order',
                     component: ProfileOrderPage,
                 },

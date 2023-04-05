@@ -4,7 +4,6 @@
         <div class="form__block">
             <img src="../assets/img/logo.png" alt="" class="form__img">
             <h3 class="form__title">Авторизация</h3>
-            <p v-if="getError" class=invalid__text>{{ getError }}</p>
             <form class="form" @submit.prevent="formSubmit">
                 <label for="email" class="form__label">Электронная почта</label>
                 <input type="text" id="email"  class="form__input " :class="$v.form.email.$error ? 'is-invalid' : ''" v-model="form.email" placeholder="info@1snab.ru">
@@ -30,6 +29,10 @@
                 </router-link>
                 <a href="#" class="form__link">Забыли пароль?</a>
             </div>
+            <ToastMessage :class="isToasts" class="toast__message" @close="isToasts.active = false"
+            :title = toastTitle
+            :description = getStatus
+            ></ToastMessage>
         </div>
         <footer-pages />
     </div>
@@ -37,13 +40,15 @@
 <script>
 import HeaderPages from '@/components/HeaderPages.vue';
 import FooterPages from '@/components/FooterPages.vue';
+import ToastMessage from '@/components/ToastMessage.vue';
 import { mapActions, mapGetters } from 'vuex';
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength } from 'vuelidate/lib/validators'
 export default {
     components: {
         HeaderPages,
-        FooterPages
+        FooterPages,
+        ToastMessage,
     },
     mixins: [validationMixin],
     data() {
@@ -52,7 +57,10 @@ export default {
                 email: '',
                 password: '',
             },
-            errors: ''
+            toastTitle: 'Авторизация',
+            isToasts: {
+                active: false,
+            },
         }
     },
     validations: {
@@ -62,7 +70,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getError"]),
+        ...mapGetters(["getStatus"]),
     },
     methods: {
         ...mapActions(['authUser']),
@@ -77,6 +85,9 @@ export default {
             let email = this.form.email
             let password = this.form.password
             this.authUser({email, password})
+            setTimeout(() => {
+                this.isToasts.active = true
+            }, 1000);
         }
     },
     

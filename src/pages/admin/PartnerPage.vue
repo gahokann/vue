@@ -23,27 +23,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td scope="row" data-label="#">1</td>
-                        <td data-label="Название компании">ООО "ПСК"</td>
-                        <td data-label="Дата регистрации">15.02.2022, 15:30</td>
-                        <td class="description__partner" data-label="Описание компании">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo nihil, atque labore eum doloribus delectus? Deserunt voluptates esse laboriosam aspernatur officia? Sequi nobis inventore nihil at eveniet animi labore nulla?</td>
+                    <tr v-for="partner in getPartners" :key="partner.id">
+                        <td scope="row" data-label="#">{{ partner.id }}</td>
+                        <td data-label="Название компании">{{ partner.title }}</td>
+                        <td data-label="Дата регистрации">{{ partner.created_at }}</td>
+                        <td class="description__partner" data-label="Описание компании">{{ partner.description }}</td>
                         <td data-label="" class="btn__table__partner">
-                            <a href="#" class='btn btn-danger ms-3'>Удалить</a>
+                            <a href="#" @click="pDelete(partner.id)" class='btn btn-danger ms-3'>Удалить</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <ModalAddPartnerVue :class="isModalPartnerAdd" @close="isModalPartnerAdd.active = false" ></ModalAddPartnerVue>
+            <ModalAddPartnerVue :class="isModalPartnerAdd" @toast="isToasts.active = true" @close="isModalPartnerAdd.active = false" ></ModalAddPartnerVue>
         </div>
+        <ToastMessage :class="isToasts" class="toast__message" @close="isToasts.active = false"
+            :title = toastTitle
+            :description = getStatus
+        ></ToastMessage>
     </div>
 </template>
 <script>
 import ModalAddPartnerVue from '@/components/ModalAddPartner.vue';
+import ToastMessage from '@/components/ToastMessage.vue';
+import { mapActions, mapGetters } from 'vuex';
 export default {
 
     components: {
-        ModalAddPartnerVue
+        ModalAddPartnerVue,
+        ToastMessage
     },
 
     data() {
@@ -51,7 +58,29 @@ export default {
             isModalPartnerAdd: {
                 active: false,
             },
+            isToasts: {
+                active: false,
+            },
+            toastTitle: 'Добавление партнёра',
         }
+    },
+    computed: {
+        ...mapGetters(['getPartners', 'getStatus'])
+    },
+
+    methods: {
+        ...mapActions(['setPartnersAll', 'partnerDel']),
+
+        pDelete(id) {
+            this.partnerDel(id)
+            setTimeout(() => {
+                this.isToasts.active = true
+            }, 1500);
+        }
+    },
+
+    created() {
+        this.setPartnersAll()
     }
     
 }

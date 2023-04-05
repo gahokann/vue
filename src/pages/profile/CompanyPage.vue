@@ -12,7 +12,7 @@
                 <!-- === -->
 
                 <label for="job" class="form__label">Деятельность компании</label>
-                <input v-model="form.job" type="text" id="job" class="form__input" placeholder="Компания занимается..." :class="$v.form.job.$error ? 'is-invalid' : ''">
+                <textarea v-model="form.job" type="text" id="job" class="form__input text__area" placeholder="Компания занимается..." :class="$v.form.job.$error ? 'is-invalid' : ''" />
 
                 <!-- Ошибки ври валидации -->
                 <p v-if="$v.form.job.$dirty && !$v.form.job.required" class="invalid-feedback">Обязательное поле</p> 
@@ -52,12 +52,17 @@
                 <p class="form__text">Ваша компания заблокирована!</p>
             </div>
         </div>
+        <ToastMessage :class="isToasts" class="toast__message" @close="isToasts.active = false"
+            :title = toastTitle
+            :description = getStatus
+        ></ToastMessage>
     </div>
 </template>
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import { mapActions, mapGetters } from "vuex";
+import ToastMessage from '@/components/ToastMessage.vue';
 
 export default {
     data() {
@@ -66,11 +71,18 @@ export default {
                 name: '',
                 job: '',
                 portal: '',
-            }
+            },
+            isToasts: {
+                active: false,
+            },
+            toastTitle: 'Подтверждение компании',
         }
     },
+    components: {
+        ToastMessage,
+    },
     computed: {
-        ...mapGetters(['getUser'])
+        ...mapGetters(['getUser', 'getStatus'])
     },
     mixins: [validationMixin],
     validations: {
@@ -86,6 +98,9 @@ export default {
             this.$v.form.$touch()
             if(!this.$v.form.$error) {
                 this.companyAdd(this.form)
+                setTimeout(() => {
+                        this.isToasts.active = true
+                }, 1200);
             }
         }
     }

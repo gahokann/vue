@@ -36,7 +36,12 @@
                     
                 </tbody>
             </table>
-            <ModalInfoCompany :class="isModalInfoCompany" @close="isModalInfoCompany.active = false" 
+
+            <ToastMessage :class="isToasts" class="toast__message" @close="isToasts.active = false"
+            :title = toastTitle
+            :description = getStatus
+            ></ToastMessage>
+            <ModalInfoCompany :class="isModalInfoCompany" @toast="isToasts.active = true" @close="isModalInfoCompany.active = false" 
             :cid = company.id
             :nameCompany = company.name
             :dataReg = company.created_at
@@ -45,6 +50,7 @@
             :last_name = company.user_lastName
             :phone = phone
             :status = company.status_name
+            :status_id = company.status_id
             :portal = company.link_web
             :job = company.description
             ></ModalInfoCompany>
@@ -53,15 +59,17 @@
 </template>
 <script>
 import ModalInfoCompany from '@/components/ModalInfoCompany.vue';
+import ToastMessage from '@/components/ToastMessage.vue';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
     components: {
-        ModalInfoCompany
+        ModalInfoCompany,
+        ToastMessage
     },
     
     computed: {
-        ...mapGetters(['getCompanies'])
+        ...mapGetters(['getCompanies', 'getStatus'])
     },
 
     created() {
@@ -72,8 +80,12 @@ export default {
             isModalInfoCompany: {
                 active: false,
             },
+            isToasts: {
+                active: false,
+            },
             company: [],
-            phone: "+78885552222"
+            phone: "+78885552222",
+            toastTitle: 'Изменение статуса',
         }
     },
     methods: {
@@ -84,6 +96,3 @@ export default {
     },
 }
 </script>
-<style lang="">
-    
-</style>

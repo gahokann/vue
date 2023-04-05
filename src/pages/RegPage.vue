@@ -4,7 +4,6 @@
         <div class="form__block">
             <img src="../assets/img/logo.png" alt="" class="form__img" />
             <h3 class="form__title">Регистрация</h3>
-            <p v-if="getError" class=invalid__text>{{ getError }}</p>
             <form action="" class="form" @submit.prevent="formSubmit">
                 <label for="first_name" class="form__label">Фамилия</label>
                 <input
@@ -134,6 +133,10 @@
                     Авторизация
                 </router-link>
             </div>
+            <ToastMessage :class="isToasts" class="toast__message" @close="isToasts.active = false"
+            :title = toastTitle
+            :description = getStatus
+            ></ToastMessage>
         </div>
         <footer-pages />
     </div>
@@ -141,6 +144,7 @@
 <script>
 import HeaderPages from "@/components/HeaderPages.vue";
 import FooterPages from "@/components/FooterPages.vue";
+import ToastMessage from '@/components/ToastMessage.vue';
 import { mapActions, mapGetters } from "vuex";
 
 import { validationMixin } from "vuelidate";
@@ -149,6 +153,7 @@ export default {
     components: {
         HeaderPages,
         FooterPages,
+        ToastMessage,
     },
     mixins: [validationMixin],
     data() {
@@ -163,7 +168,11 @@ export default {
                 password: "",
                 c_password: "",
             },
-            error: ''
+            error: '',
+            isToasts: {
+                active: false,
+            },
+            toastTitle: 'Регистрация',
         };
     },
     validations: {
@@ -179,7 +188,7 @@ export default {
         },
     },
     computed: {
-        ...mapGetters(['getError'])
+        ...mapGetters(['getStatus'])
     },
     methods: {
         ...mapActions(['regUser']),
@@ -188,6 +197,9 @@ export default {
             if (!this.$v.form.$error) {
             if (this.form.password == this.form.c_password) {
                     this.regUser(this.form)
+                    setTimeout(() => {
+                        this.isToasts.active = true
+                    }, 1000);
                 }
             }
 

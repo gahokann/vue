@@ -11,10 +11,14 @@ export default (api) => {
                 await api.order.createOrder(data)
                 .then(() => {
                     dispatch('setOrder')
-                    router.push({name: 'profileMain'})
+                    commit("SET_STATUS", 'Заказ успешно оформлен')
+                    setTimeout(() => {
+                        router.push({name: 'profileAllOrders'})
+                        commit("SET_STATUS", '')
+                    }, 2500)
                 })
                 .catch(err => {
-                    commit("SET_ERROR", err.response.data.message)
+                    commit("SET_STATUS", err.response.data.message)
                 });
             },
 
@@ -23,11 +27,19 @@ export default (api) => {
                 .then(res => {
                     commit('SET_ORDER' ,res.data)
                 }).catch(() => {
-                    commit('LOGOUT')
                     router.push({ name: 'main' })
                 })
             },
-            
+
+            async setOrderUser({commit}, id) {
+                await api.order.getOrderFirst(id)
+                .then(res => {
+                    commit('SET_ORDER_USER' ,res.data)
+                }).catch(() => {
+                    router.push({ name: 'main' })
+                })
+            },
+
         },
 
         mutations: {
@@ -36,20 +48,30 @@ export default (api) => {
                 state.orders = orders
             },
 
+            SET_ORDER_USER(state, order) {
+                state.order = order
+            },
+            
             LOGOUT(state) {
                 state.orders = ""
+                state.order = ""
             }
         },
 
         state: {
             // переменные
             orders: [],
+            order: []
         },
 
         getters: {
             // получение из переменных
             getOrder(state) {
                 return state.orders
+            },
+
+            getOrderUser(state) {
+                return state.order
             },
         },
     };

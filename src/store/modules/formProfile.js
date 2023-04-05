@@ -12,11 +12,12 @@ export default (api) => {
                 .then(res => {
                     commit("SET_TOKEN", res.data.token)
                     localStorage.setItem('number__column', res.data.number__column)
-                    commit("SET_ERROR", "")
+                    commit("SET_STATUS", "")
                     router.push({ name: 'profileMain' })
                 })
                 .catch(err => {
-                    commit("SET_ERROR", err.response.data.message)
+                    commit("SET_STATUS", err.response.data.message)
+                    commit("SET_HTTPCODE", err.response.status)
                     commit("LOGOUT");
                 });
             },
@@ -25,11 +26,12 @@ export default (api) => {
                 await api.auth.reg(user)
                 .then(res => {
                     commit("SET_TOKEN", res.data.token)
-                    commit("SET_ERROR", "")
+                    commit("SET_STATUS", "")
                     router.push({ name: 'profileMain' })
                 })
                 .catch(err => {
-                    commit("SET_ERROR", err.response.data.message)
+                    // console.log(err)
+                    commit("SET_STATUS", err.response.data.data)
                     commit("LOGOUT")
                 });
             },
@@ -38,14 +40,10 @@ export default (api) => {
                 await api.user.fioChange(data)
                 .then(res => {
                     dispatch('setUser')
-                    commit('SET_SUCCESS', res.data)
-                    commit("SET_ERROR_SETTINGS", '')
-                    setTimeout(() => {
-                        commit('SET_SUCCESS', '')
-                    }, 2500);
+                    commit('SET_STATUS', res.data)
                 })
                 .catch(err => {
-                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                    commit("SET_STATUS", err.response.data.message)
                 })
             },
 
@@ -53,15 +51,11 @@ export default (api) => {
                 await api.user.emailChange(data)
                 .then(res => {
                     dispatch('setUser')
-                    commit('SET_SUCCESS', res.data)
-                    commit("SET_ERROR_SETTINGS", '')
-                    setTimeout(() => {
-                        commit('SET_SUCCESS', '')
-                    }, 2500);
+                    commit('SET_STATUS', res.data)
                 })
                 .catch(err => {
                     console.log(err);
-                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                    commit("SET_STATUS", err.response.data.message)
                 })
             },
 
@@ -69,14 +63,11 @@ export default (api) => {
                 await api.user.phoneChange(data)
                 .then(res => {
                     dispatch('setUser')
-                    commit('SET_SUCCESS', res.data)
-                    commit("SET_ERROR_SETTINGS", '')
-                    setTimeout(() => {
-                        commit('SET_SUCCESS', '')
-                    }, 2500);
+                    commit('SET_STATUS', res.data)
+                    
                 })
                 .catch(err => {
-                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                    commit("SET_STATUS", err.response.data.message)
                 })
             },
 
@@ -84,39 +75,27 @@ export default (api) => {
                 await api.user.passwordChange(data)
                 .then(res => {
                     dispatch('setUser')
-                    commit('SET_SUCCESS', res.data)
-                    commit("SET_ERROR_SETTINGS", '')
-                    setTimeout(() => {
-                        commit('SET_SUCCESS', '')
-                    }, 2500);
+                    commit('SET_STATUS', res.data)
                 })
                 .catch(err => {
                     console.log(err)
-                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                    commit("SET_STATUS", err.response.data.message)
                 })
             },
 
             async companyAdd({ commit, dispatch }, data) {
                 await api.user.companyAdd(data)
-                await api.user.companyAdd(data)
                 .then(() => {
-                    // commit('SET_SUCCESS', res.data.message)
                     dispatch('setUser');
-
-                    setTimeout(() => {
-                        commit('SET_SUCCESS', '')
-                    }, 5000);
+                    commit("SET_STATUS", 'Компания успешно оформлена')
                 })
                 .catch(err => {
                     console.log(err)
-                    commit("SET_ERROR_SETTINGS", err.response.data.message)
+                    commit("SET_STATUS", err.response.data.message)
                 })
             },
 
-            logout({ commit, dispatch }) {
-                commit("LOGOUT");
-                dispatch("LOGOUT")
-            },
+            
         },
 
         mutations: {
@@ -127,50 +106,20 @@ export default (api) => {
                 
             },
 
-            SET_SUCCESS(state, success) {
-                state.success = success
-            },
-
-            SET_ERROR(state, error) {
-                state.error = error
-            },
-
-            SET_ERROR_SETTINGS(state, error) {
-                state.errorSettings = error
-            },
-
             LOGOUT(state) {
                 localStorage.removeItem("token");
-                localStorage.removeItem("number__column");
                 state.token = "";
-                state.orders = "";
-                state.users = "";
-                state.roles = "";
-                state.employee = "";
             },
         },
 
         state: {
             // переменные
             token: localStorage.getItem("token") || "",
-            error: "",
-            errorSettings: '',
-            success: '',
         },
 
         getters: {
-            // получение из переменных
-            getError(state) {
-                return state.error
-            },
+            // получение из переменны
 
-            getErrorSettings(state) {
-                return state.errorSettings
-            },
-
-            getSuccess(state) {
-                return state.success
-            },
 
             isAuthenticated: (state) => !!state.token,
         },

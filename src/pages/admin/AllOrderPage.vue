@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="order in getOrders" :key="order.id">
+                    <tr v-for="order in getOrdersAll" :key="order.id">
                         <td scope="row" data-label="#">{{ order.id }}</td>
                         <td data-label="Товар">{{ order.title }}</td>
                         <td data-label="Статус заказа">{{ order.status_name }}</td>
@@ -56,7 +56,7 @@ export default {
         ...mapActions(['setOrderAll'])
     },
     computed: {
-        ...mapGetters(['getOrders'])
+        ...mapGetters(['getOrdersAll'])
     },
     created() {
         this.setOrderAll()

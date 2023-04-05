@@ -1107,7 +1107,50 @@ p {
 }
 
 .link__back {
+    border: 1px solid #F88C21;
     border-left: 0;
     border-top: 0;
     border-radius: 0 0 10px 0;
+}
+
+.link__back > svg {
+    fill: #F88C21;
+}
+
+.link__back:hover > svg {
+    fill: #fff;
+}
+
+.link__back:hover {
+    background-color: #F88C21;
+    border: 1px solid #F88C21;
+    border-left: 0;
+    border-top: 0;
+}
+
+
+.toast {
+    display: block !important;
+}
+
+.toast__message {
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s;
+}
+
+.toast__message.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.toast__img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.form__input.text__area {
+    max-height: 190px;
 }

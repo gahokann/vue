@@ -2,8 +2,6 @@
     <div class="index__profile">
         <div class="settings__items">
             <div class="settings__item">
-                <p v-if="getSuccess" class="valid__form__settings">{{ getSuccess }}</p>
-                <p v-if="getErrorSettings" class="invalid-feedback__formSetting">{{ getErrorSettings }}</p>
                 <h3 class="settings__item__title">ФИО</h3>
                 <p class="settings__item__fio">
                     {{
@@ -243,6 +241,10 @@
                     </form>
                 </div>
             </div>
+            <ToastMessage :class="isToasts" class="toast__message" @close="isToasts.active = false"
+            :title = toastTitle
+            :description = getStatus
+            ></ToastMessage>
         </div>
     </div>
 </template>
@@ -250,9 +252,13 @@
 import { mapGetters, mapActions } from "vuex";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
+import ToastMessage from "@/components/ToastMessage.vue";
 export default {
     computed: {
-        ...mapGetters(["getUser", "getErrorSettings", 'getSuccess']),
+        ...mapGetters(["getUser", "getStatus"]),
+    },
+    components: {
+        ToastMessage
     },
     mixins: [validationMixin],
     data() {
@@ -288,6 +294,10 @@ export default {
                 new_password: "",
                 c_password: "",
             },
+            isToasts: {
+                active: false,
+            },
+            toastTitle: 'Настройки'
         };
     },
     validations: {
@@ -320,6 +330,9 @@ export default {
             this.$v.formFio.$touch()
             if (!this.$v.formFio.$error) {
                 this.fioChange(this.formFio)
+                setTimeout(() => {
+                    this.isToasts.active = true
+                }, 1500);
             }
         },
 
@@ -327,6 +340,9 @@ export default {
             this.$v.formEmail.$touch()
             if (!this.$v.formEmail.$error) {
                 this.emailChange(this.formEmail)
+                setTimeout(() => {
+                    this.isToasts.active = true
+                }, 1500);
             }
         },
 
@@ -334,6 +350,9 @@ export default {
             this.$v.formPhone.$touch()
             if (!this.$v.formPhone.$error) {
                 this.phoneChange(this.formPhone)
+                setTimeout(() => {
+                    this.isToasts.active = true
+                }, 1500);
             }
         },
 
@@ -341,6 +360,9 @@ export default {
             this.$v.formPassword.$touch()
             if (!this.$v.formPassword.$error) {
                 this.passwordChange(this.formPassword)
+                setTimeout(() => {
+                    this.isToasts.active = true
+                }, 1500);
             }
         },
         

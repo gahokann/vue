@@ -18,6 +18,22 @@ export default function(instance) {
 
         companyAll() {
             return instance.get('admin/companyAll')
+        },
+
+        partnerAll() {
+            return instance.get('admin/partnerAll')
+        },
+
+        companyStatus(payload) {
+            return instance.post('admin/companyStatus', payload)
+        },
+
+        addPartner(payload) {
+            return instance.post('admin/partnerStore', payload)
+        },
+
+        delPartner(payload) {
+            return instance.post('admin/partnerDelete', payload)
         }
         
     }
