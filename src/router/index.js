@@ -80,7 +80,7 @@ export default new VueRouter ({
                     name: 'profileAllOrders',
                     component: ProfileAllOrderPage,
                     beforeEnter: (to, from, next) => {
-                        if(store.getters.isAuthenticated && store.getters.isСustomer) {
+                        if(store.getters.isAuthenticated && store.getters.isСustomer || store.getters.isEmployee) {
                             next()
                         } else {
                             next({name: 'profileMain'})
@@ -92,7 +92,7 @@ export default new VueRouter ({
                     name: 'profileActiveOrders',
                     component: ProfileActiveOrderPage,
                     beforeEnter: (to, from, next) => {
-                        if(store.getters.isAuthenticated && store.getters.isСustomer) {
+                        if(store.getters.isAuthenticated && store.getters.isСustomer || store.getters.isEmployee) {
                             next()
                         } else {
                             next({name: 'profileMain'})

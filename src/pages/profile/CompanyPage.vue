@@ -25,6 +25,21 @@
                 <p v-if="$v.form.portal.$dirty && !$v.form.portal.required" class="invalid-feedback">Обязательное поле</p> 
                 <!-- === -->
 
+                <label for="portal" class="form__label">ИНН</label>
+                <input v-model="form.inn" type="text" id="portal" class="form__input" placeholder="Указываете ИНН" :class="$v.form.inn.$error ? 'is-invalid' : ''">
+
+                <!-- Ошибки ври валидации -->
+                <p v-if="$v.form.inn.$dirty && !$v.form.inn.required" class="invalid-feedback">Обязательное поле</p> 
+                <p v-if="$v.form.inn.$dirty && !$v.form.inn.maxLength" class="invalid-feedback">Максимальное количество символов: 12</p> 
+                <!-- === -->
+
+                <label for="portal" class="form__label">Городской телефон</label>
+                <input v-model="form.phone_number" type="text" id="portal" class="form__input" placeholder="+74998882222" :class="$v.form.phone_number.$error ? 'is-invalid' : ''">
+
+                <!-- Ошибки ври валидации -->
+                <p v-if="$v.form.phone_number.$dirty && !$v.form.phone_number.required" class="invalid-feedback">Обязательное поле</p> 
+                <!-- === -->
+
                 <p class="form__input-comment">Не обязательно</p>
                 <button class="btn btn-orange auth__btn">Подтвердить</button>
             </form>
@@ -60,7 +75,7 @@
 </template>
 <script>
 import { validationMixin } from "vuelidate";
-import { required } from "vuelidate/lib/validators";
+import { required, maxLength } from "vuelidate/lib/validators";
 import { mapActions, mapGetters } from "vuex";
 import ToastMessage from '@/components/ToastMessage.vue';
 
@@ -71,6 +86,8 @@ export default {
                 name: '',
                 job: '',
                 portal: '',
+                inn: '',
+                phone_number: '',
             },
             isToasts: {
                 active: false,
@@ -90,6 +107,8 @@ export default {
             name: { required },
             job: { required },
             portal: { required },
+            inn: { required, maxLength: maxLength(12) },
+            phone_number: { required },
         },
     },
     methods: {

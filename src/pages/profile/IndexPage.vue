@@ -45,7 +45,11 @@
                             <p v-if="order.employee_firstName == null">Не назначен</p>
                             <p v-if="order.employee_firstName != null">{{ order.employee_firstName }}</p>
                         </td>
-                        <td data-label=""><a href="#" class='btn btn-orange'>Открыть</a></td>
+                        <td data-label="">
+                            <router-link :to="{ name: 'order', params: {id: order.id} }" class="btn btn-orange">
+                                Открыть
+                            </router-link>
+                        </td>
                     </tr>
                 </tbody>
             </table>

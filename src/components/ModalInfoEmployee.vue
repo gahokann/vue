@@ -30,9 +30,6 @@ export default {
         }
     },
     props: {
-        orderNumber: {
-            type: Number,
-        },
         firstName: {
             type: String,
         },

@@ -75,7 +75,7 @@
                     </svg>
                     <p class="sidebar__profile__nav__link__text">Для компании</p>
                 </router-link>
-                <div v-if="isСustomer">
+                <div v-if="isСustomer || isEmployee">
                 <div class="separator"></div>
                 <h5 class="sidebar__profile__nav__title">Заказы</h5>
                 <router-link :to="{ name: 'profileAllOrders' }" class="sidebar__profile__nav__link">

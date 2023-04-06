@@ -13,6 +13,34 @@
         margin-top: 0;
     }
 }
+
+@media(max-width: 1600px) {
+    
+    .userPageTableAdmin thead {
+        display: none;
+    }
+
+    .userPageTableAdmin tr {
+        display: block;
+    }
+
+    .userPageTableAdmin td {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+
+    .userPageTableAdmin td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 20px;
+   }
+
+   .userPageTableAdmin tr {
+        margin-bottom: 20px;
+   }
+}
+
 @media(max-width: 1440px) {
     .footer.main > .container {
         column-gap: 50px;
@@ -133,6 +161,10 @@
    .companyTablePage tr {
         margin-bottom: 20px;
    }
+
+   .spinner__card {
+    top: 230px;
+}
 
 }
 
@@ -481,6 +513,8 @@
     .order__block__info__item:last-child {
         column-gap: 15px;
     }
+
+    
 }
 
 @media(max-width: 530px) {

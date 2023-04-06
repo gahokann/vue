@@ -11,10 +11,11 @@
                         <p class="modal__company__date"><span class="bold">Дата регистрации</span>: {{ dataReg }}</p>
                         <p class="modal__company__fio"><span class="bold">Представитель компании</span>: {{ `${first_name} ${second_name} ${last_name}` }}</p>
                         <p class="modal__company__fio"><span class="bold">Номер телефона</span>: {{ phone }}</p>
+                        <p class="modal__company__fio"><span class="bold">ИНН</span>: {{ inn }}</p>
                         <p class="modal__company__status"><span class="bold">Статус</span>: {{ status }}</p>
                         <p class="modal__company__portal"><span class="bold">Интернет-портал</span>: {{ portal }}</p>
                         <p class="modal__company__desc"><span class="bold">Деятельность компании</span>: {{ job }}</p>
-                        <div class="btns__company__status">
+                        <div v-if="isChief" class="btns__company__status">
                             <button @click="statusCompany(cid, 2)" v-if="status_id == 1 || status_id == 3" class="btn btn-success">Одобрить</button>
                             <button @click="statusCompany(cid, 3)" v-if="status_id == 1" class="btn btn-danger" style="margin-left: 10px">Отклонить</button>
                             <button @click="statusCompany(cid, 4)" v-if="status_id == 2" class="btn btn-danger" style="margin-left: 10px">Заблокировать</button>
@@ -29,7 +30,7 @@
     </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     props: {
@@ -65,7 +66,13 @@ export default {
         },
         status_id: {
             type: Number
+        },
+        inn: {
+            type: String,
         }
+    },
+    computed: {
+        ...mapGetters(['isChief'])
     },
     methods: {
         closeModal() {

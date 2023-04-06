@@ -12,7 +12,7 @@
             <div class="index__profile__orders__info">
                 <h3 class="index__profile__order__title mb-2">Пользователи</h3>
             </div>
-            <table class="table adminPageTable">
+            <table class="table adminPageTable userPageTableAdmin">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -22,6 +22,7 @@
                         <th scope="col">Почта</th>
                         <th scope="col">Номер телефона</th>
                         <th scope="col">Компания</th>
+                        <th scope="col">Уровень доступа</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                             <p v-if="user.company != null">{{ user.company.name }}</p>
                             
                         </td>
+                        <td data-label="Уровень доступа">{{ user.role_name }}</td>
                         <td data-label=""><router-link :to="{name: 'adminClientPerson'}" class='btn btn-orange'>Открыть</router-link></td>
                     </tr>
                     

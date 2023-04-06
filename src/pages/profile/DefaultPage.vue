@@ -51,7 +51,7 @@
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-bell"
+                        class="bi bi-bell bell__icon"
                         viewBox="0 0 16 16"
                     >
                         <path
@@ -66,6 +66,7 @@
                         fill="currentColor"
                         class="bi bi-box-arrow-right btn__logout"
                         viewBox="0 0 16 16"
+                        
                     >
                         <path
                             fill-rule="evenodd"

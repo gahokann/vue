@@ -24,7 +24,7 @@ export default (api) => {
 
             nullHttpCode({commit}) {
                 commit('NULLHTTP')
-            }
+            },
         },
 
         mutations: {
@@ -84,7 +84,7 @@ export default (api) => {
             },
 
             isUser: (state) => state.role_id == 1,
-            isСustomer: (state) => state.role_id > 1,
+            isСustomer: (state) => state.user.company_status == 2,
             isEmployee: (state) => state.role_id > 2,
             isChief: (state) => state.role_id > 4,
         },
