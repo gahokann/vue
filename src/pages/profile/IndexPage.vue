@@ -20,7 +20,7 @@
         <div class="index__profile__orders">
             <div class="index__profile__orders__info">
                 <h3 class="index__profile__order__title">Активные заказы</h3>
-                <router-link :to="{ name: 'orderCreate' }" class="btn btn-orange">
+                <router-link v-if="isСustomer" :to="{ name: 'orderCreate' }" class="btn btn-orange">
                 Сделать заказ
                 </router-link>
             </div>
@@ -36,14 +36,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="order in getOrder" :key="order.id">
+                    <tr v-for="order in getActiveOrder" :key="order.id">
                         <td scope="row" data-label="#">{{ order.id }}</td>
                         <td data-label="Товар">{{ order.title }}</td>
                         <td data-label="Статус заказа">{{ order.status_name }}</td>
                         <td data-label="Дата доставки">{{ order.created_at }}</td>
                         <td data-label="Сотрудник" >
                             <p v-if="order.employee_firstName == null">Не назначен</p>
-                            <p v-if="order.employee_firstName != null">{{ order.employee_firstName }}</p>
+                            <p v-if="order.employee_firstName != null">
+                                {{ `${order.employee_firstName} ${order.employee_secondName[0]}.${order.employee_lastName[0]}.` }}
+                            </p>
                         </td>
                         <td data-label="">
                             <router-link :to="{ name: 'order', params: {id: order.id} }" class="btn btn-orange">
@@ -60,7 +62,7 @@
 import { mapGetters } from 'vuex';
 export default {
     computed: {
-        ...mapGetters(['getUser', 'getOrder'])
+        ...mapGetters(['getUser', 'getOrder', 'getActiveOrder', 'isСustomer'])
     },
 
 

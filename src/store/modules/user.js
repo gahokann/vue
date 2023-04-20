@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router'
 import Vue from 'vue';
 import router from '../../router/index'
+import { LoadingStatuses } from '@/types'; // TODO: Статусы загрузки данных
 // ! ПОПРОБОВАТЬ ИЗМЕНИТЬ!
 Vue.use(VueRouter)
 export default (api) => {
@@ -8,15 +9,56 @@ export default (api) => {
         actions: {
             // Работа из api
             async setUser({commit}) {
+                commit('SET_LOAD_STATUS_USER', LoadingStatuses.Loading)
                 await api.user.userInfo()
                 .then(res => {
+                    if(res.data.data == null) commit('SET_LOAD_STATUS_USER', LoadingStatuses.Empty)
+                    else commit('SET_LOAD_STATUS_USER', LoadingStatuses.Ready)
                     commit('SET_USER' ,res.data.data)
                     commit('SET_ROLE' ,res.data.data.role_id)
-                }).catch(() => {
+                }).catch(err => {
+                    commit('SET_LOAD_STATUS_USER', LoadingStatuses.Error)
                     commit('LOGOUT')
+                    commit('SET_HTTPCODE', err.response.status)
+                    commit('SET_ERROR_STATUS', err.response.data.message)
                     router.push({ name: 'main' })
                 })
             },
+
+            async updateUser({commit}) {
+                await api.user.userInfo()
+                .then(res => {
+                    commit('SET_USER' ,res.data.data)
+                }).catch(err => {
+                    commit('LOGOUT')
+                    commit('SET_HTTPCODE', err.response.status)
+                    router.push({ name: 'main' })
+                })
+            },
+
+            // async setNotifications({commit}) {
+            //     commit('SET_LOAD_STATUS_USER', LoadingStatuses.Loading)
+            //     await api.user.notification()
+            //     .then(res => {
+            //         if(res.data.data == null) commit('SET_LOAD_NOTIFICATION', LoadingStatuses.Empty)
+            //         else commit('SET_LOAD_NOTIFICATION', LoadingStatuses.Ready)
+            //         commit('SET_NOTIFICATION', res.data)
+            //     }).catch(() => {
+            //         commit('SET_LOAD_STATUS_USER', LoadingStatuses.Error)
+            //         router.push({ name: 'profileMain' })
+            //     })
+            // },
+
+            // async setNotificationsRead({dispatch}, data) {
+            //     await api.user.notifIsRead({
+            //         id: data,
+            //     })
+            //     .then(() => {
+            //         dispatch('setNotifications')
+            //     }).catch(() => {
+            //         router.push({ name: 'profileMain' })
+            //     })
+            // },
 
             nullStatus({commit}) {
                 commit('NULLSTATUS')
@@ -48,6 +90,10 @@ export default (api) => {
                 state.status = status
             },
 
+            SET_ERROR_STATUS(state, status) {
+                state.error_status = status
+            },
+
             SET_HTTPCODE(state, httpcode) {
                 state.http_code = httpcode
             },
@@ -58,7 +104,19 @@ export default (api) => {
 
             NULLSTATUS(state) {
                 state.status = null
-            }
+            },
+
+            SET_LOAD_STATUS_USER(state, status) {
+                state.loadPageStatus = status
+            },
+
+            // SET_LOAD_NOTIFICATION(state, status) {
+            //     state.loadNotificationStatus = status
+            // },
+
+            // SET_NOTIFICATION(state, data) {
+            //     state.notifications = data
+            // }
         },
 
         state: {
@@ -67,6 +125,10 @@ export default (api) => {
             role_id: localStorage.getItem('number__column'),
             status: null,
             http_code: null,
+            error_status: null,
+            loadPageStatus: null,
+            // loadNotificationStatus: null,
+            // notifications: []
         },
 
         getters: {
@@ -79,14 +141,35 @@ export default (api) => {
                 return state.status
             },
 
+            getErrorStatus(state) {
+                return state.error_status
+            },
+
+            // getNotification(state) {
+            //     return state.notifications
+            // },
+
+            // getNotificationActivity(state) {
+            //     return state.notifications.filter(o => {
+            //         return o.is_read == 0 
+            //     })
+            // },
+
+            getLoadPageStatus(state) {
+                return state.loadPageStatus
+            },
+            // getLoadNotificationStatus(state) {
+            //     return state.loadNotificationStatus
+            // },
+
             getHttpCode(state) {
                 return state.http_code
             },
 
             isUser: (state) => state.role_id == 1,
             isСustomer: (state) => state.user.company_status == 2,
-            isEmployee: (state) => state.role_id > 2,
-            isChief: (state) => state.role_id > 4,
+            isEmployee: (state) => state.role_id > 1,
+            isChief: (state) => state.role_id > 3,
         },
     };
 };

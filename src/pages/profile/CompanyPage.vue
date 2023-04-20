@@ -35,9 +35,11 @@
 
                 <label for="portal" class="form__label">Городской телефон</label>
                 <input v-model="form.phone_number" type="text" id="portal" class="form__input" placeholder="+74998882222" :class="$v.form.phone_number.$error ? 'is-invalid' : ''">
+                
 
                 <!-- Ошибки ври валидации -->
                 <p v-if="$v.form.phone_number.$dirty && !$v.form.phone_number.required" class="invalid-feedback">Обязательное поле</p> 
+                <p v-if="$v.form.phone_number.$dirty && !$v.form.phone_number.maxLength" class="invalid-feedback">Максимальное количество символов: 12</p> 
                 <!-- === -->
 
                 <p class="form__input-comment">Не обязательно</p>
@@ -108,7 +110,7 @@ export default {
             job: { required },
             portal: { required },
             inn: { required, maxLength: maxLength(12) },
-            phone_number: { required },
+            phone_number: { required, maxLength: maxLength(12) },
         },
     },
     methods: {

@@ -1,26 +1,11 @@
 <template lang="">
-    <div v-if="show" id="preloader">
+    <div id="preloader">
         <div id="loader">
         </div>
     </div>
 </template>
 <script>
 export default {
-    data() {
-        return {
-            show: true
-        }
-    },
-    mounted() {
-        this.showToggle()
-    },
-    methods: {
-        showToggle() {
-            setTimeout(() => {
-                this.show = false
-            }, 2500);
-        }
-    }
 };
 </script>
 
@@ -34,21 +19,8 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 9999;
-    animation: seconds 1.0s forwards;
-    animation-iteration-count: 1;
-    animation-delay: 1.8s;
     transition: all .5s
 }
-
-@keyframes seconds {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 
 #loader {
     display: block;

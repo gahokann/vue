@@ -10,9 +10,13 @@ export default (api) => {
             async authUser( {commit} , user) {
                 await api.auth.auth(user)
                 .then(res => {
+                    console.log(res)
                     commit("SET_TOKEN", res.data.token)
                     localStorage.setItem('number__column', res.data.number__column)
-                    commit("SET_STATUS", "")
+                    commit("SET_STATUS", "Вы успешно авторизовались!")
+                    setTimeout(() => {
+                        commit("SET_STATUS", "")
+                    }, 2500);
                     router.push({ name: 'profileMain' })
                 })
                 .catch(err => {
@@ -26,11 +30,14 @@ export default (api) => {
                 await api.auth.reg(user)
                 .then(res => {
                     commit("SET_TOKEN", res.data.token)
-                    commit("SET_STATUS", "")
+                    commit("SET_STATUS", "Вы успешно прошли регистрацию!")
+                    setTimeout(() => {
+                        commit("SET_STATUS", "")
+                    }, 2500);
                     router.push({ name: 'profileMain' })
                 })
                 .catch(err => {
-                    // console.log(err)
+                    console.log(err)
                     commit("SET_STATUS", err.response.data.data)
                     commit("LOGOUT")
                 });
@@ -39,7 +46,7 @@ export default (api) => {
             async fioChange({commit, dispatch}, data) {
                 await api.user.fioChange(data)
                 .then(res => {
-                    dispatch('setUser')
+                    dispatch('updateUser')
                     commit('SET_STATUS', res.data)
                 })
                 .catch(err => {
@@ -50,7 +57,7 @@ export default (api) => {
             async emailChange({commit, dispatch}, data) {
                 await api.user.emailChange(data)
                 .then(res => {
-                    dispatch('setUser')
+                    dispatch('updateUser')
                     commit('SET_STATUS', res.data)
                 })
                 .catch(err => {
@@ -62,7 +69,7 @@ export default (api) => {
             async phoneChange({commit, dispatch}, data) {
                 await api.user.phoneChange(data)
                 .then(res => {
-                    dispatch('setUser')
+                    dispatch('updateUser')
                     commit('SET_STATUS', res.data)
                     
                 })
@@ -74,7 +81,7 @@ export default (api) => {
             async passwordChange({commit, dispatch}, data) {
                 await api.user.passwordChange(data)
                 .then(res => {
-                    dispatch('setUser')
+                    dispatch('updateUser')
                     commit('SET_STATUS', res.data)
                 })
                 .catch(err => {

@@ -382,7 +382,7 @@
 
     .sidebar__profile__burger.active:before {
         transform: rotate(45deg);
-        top: 9px;
+        top: 13px;
     }
 
     .sidebar__profile__burger.active:after {
@@ -447,6 +447,10 @@
     .profile__info__fio-company {
         display: none;
     }
+
+    .nav__profile__notifications {
+        right: 0;
+    }
 }
 
 @media(max-width: 768px) {
@@ -493,6 +497,18 @@
 
     .adminPageTable tr {
         margin-bottom: 20px;
+    }
+
+    .nav__profile__notifications {
+        width: 400px;
+    }
+
+    .nav__profile__notifications__column {
+        display: none;
+    }
+
+    .nav__profile__notifications__column.no-text {
+        display: block;
     }
 
 }
@@ -561,6 +577,24 @@
     .index__profile {
         padding: 20px;
         margin-bottom: 70px;
+    }
+
+    .nav__profile__notifications__title {
+        font-size: 16px;
+    }
+
+    .nav__profile__notifications__column.no-text {
+        font-size: 14px;
+    }
+
+    .profile__notifications__text,
+    .profile__notifications__descrription,
+    .profile__notifications__date {
+        font-size: 12px;
+    }
+
+    .nav__profile__notifications {
+        width: 350px;
     }
 }
 
@@ -634,6 +668,10 @@
         width: 60px;
     }
 
+    .border-light.unread__sidebar {
+        display: none;
+    }
+
 
     .separator {
         display: none;
@@ -680,6 +718,12 @@
 
     .profile__mobile {
         display: flex; justify-content: space-between; width: 100%
+    }
+
+    .nav__profile__notifications {
+        width: 320px;
+        height: 500px;
+        overflow: auto;
     }
 
 }

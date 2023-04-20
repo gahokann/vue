@@ -34,6 +34,26 @@ export default function(instance) {
 
         delPartner(payload) {
             return instance.post('admin/partnerDelete', payload)
+        },
+
+        orderEmployee() {
+            return instance.get('admin/orderEmployee')
+        },
+
+        changeRole(payload) {
+            return instance.post('admin/changeRole', payload)
+        },
+
+        orderWork(payload) {
+            return instance.post('admin/orderWork', payload)
+        },
+
+        removeEmployeeOrder(payload) {
+            return instance.post('admin/removeEmployeeOrder', payload)
+        },
+
+        changeStatusOrder(payload) {
+            return instance.post('admin/orderStatus', payload)
         }
         
     }

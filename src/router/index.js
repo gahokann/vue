@@ -9,7 +9,6 @@ import ProfileIndexPage from '../pages/profile/IndexPage.vue'
 import ProfileSettingsPage from '../pages/profile/SettingsPage.vue'
 import ProfileCompanyPage from '../pages/profile/CompanyPage.vue'
 import ProfileAllOrderPage from '../pages/profile/AllOrderPage.vue'
-import ProfileActiveOrderPage from '../pages/profile/ActiveOrderPage.vue'
 import ProfileOrderPage from '../pages/profile/OrderPage.vue'
 import ProfileOrderCreatePage from '../pages/profile/OrderCreatePage.vue'
 import AdminUsers from '../pages/admin/UserPage.vue'
@@ -19,7 +18,10 @@ import AdminCompany from '../pages/admin/CopmanyPage.vue'
 import AdminPartner from '../pages/admin/PartnerPage.vue'
 import AdminPerson from '../pages/admin/EmployeePersonPage.vue'
 import AdminClientPerson from '../pages/admin/ClientPersonPage.vue'
-import NotFound from '../pages/NotFound.vue'
+import AdminJobOrderPage from '../pages/admin/JobOrderPage.vue'
+import Notifications from '../pages/profile/NotificationsPage.vue'
+import NotFound from '../pages/layouts/NotFound.vue'
+
 
 
 export default new VueRouter ({
@@ -64,6 +66,9 @@ export default new VueRouter ({
                     path: '/user',
                     name: 'profileMain',
                     component: ProfileIndexPage,
+                    meta: {
+                        ProfileMain: true
+                    }
                 },
                 {
                     path: '/settings',
@@ -76,38 +81,38 @@ export default new VueRouter ({
                     component: ProfileCompanyPage,
                 },
                 {
+                    path: '/notifications',
+                    name: 'notifications',
+                    component: Notifications,
+                },
+                {
                     path: '/allOrders',
                     name: 'profileAllOrders',
                     component: ProfileAllOrderPage,
-                    beforeEnter: (to, from, next) => {
-                        if(store.getters.isAuthenticated && store.getters.isСustomer || store.getters.isEmployee) {
-                            next()
-                        } else {
-                            next({name: 'profileMain'})
-                        }
-                    },
-                },
-                {
-                    path: '/activeOrders',
-                    name: 'profileActiveOrders',
-                    component: ProfileActiveOrderPage,
-                    beforeEnter: (to, from, next) => {
-                        if(store.getters.isAuthenticated && store.getters.isСustomer || store.getters.isEmployee) {
-                            next()
-                        } else {
-                            next({name: 'profileMain'})
-                        }
-                    },
                 },
                 {
                     path: '/order/:id',
                     name: 'order',
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isAuthenticated && store.getters.isСustomer || store.getters.isEmployee) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                     component: ProfileOrderPage,
                 },
                 {
                     path: '/orderCreate',
                     name: 'orderCreate',
                     component: ProfileOrderCreatePage,
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isAuthenticated && store.getters.isСustomer || store.getters.isEmployee) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                 },
                 
             ]
@@ -201,6 +206,18 @@ export default new VueRouter ({
                         }
                     },
                     component: AdminClientPerson,
+                },
+                {
+                    path: 'admin/jobOrderPage',
+                    name: 'adminJobOrder',
+                    component: AdminJobOrderPage,
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isAuthenticated && store.getters.isEmployee) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
                 },
             ]
         },

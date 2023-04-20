@@ -75,6 +75,24 @@
                     </svg>
                     <p class="sidebar__profile__nav__link__text">Для компании</p>
                 </router-link>
+                <router-link :to="{ name: 'notifications' }" class="sidebar__profile__nav__link">
+                    <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                class="bi bi-bell bell__icon"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"
+                                />
+                    </svg>
+                    <span v-if="getNotificationActivity.length != 0"  class="position-absolute unread__sidebar p-2 bg-danger border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <p class="sidebar__profile__nav__link__text">Уведомления</p>
+                </router-link>
                 <div v-if="isСustomer || isEmployee">
                 <div class="separator"></div>
                 <h5 class="sidebar__profile__nav__title">Заказы</h5>
@@ -84,12 +102,7 @@
 </svg>
                     <p class="sidebar__profile__nav__link__text">Все заказы</p>
                 </router-link>
-                <!-- <router-link :to="{name: 'profileActiveOrders'}" class="sidebar__profile__nav__link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
-</svg>
-                    <p class="sidebar__profile__nav__link__text">Активные заказы</p>
-                </router-link> -->
+                
             </div>
                 
             </div>
@@ -104,6 +117,12 @@
 </svg>
                     <p class="sidebar__profile__nav__link__text">Главная</p>
                 </router-link> -->
+                <router-link v-if="isEmployee" :to="{name: 'adminJobOrder'}" class="sidebar__profile__nav__link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+                    </svg>
+                    <p class="sidebar__profile__nav__link__text">Заказы в работе</p>
+                </router-link>
                 <router-link :to="{name: 'adminUsers'}" class="sidebar__profile__nav__link" v-if="isChief">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
   <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
@@ -121,7 +140,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
 </svg>
-                    <p class="sidebar__profile__nav__link__text">Заказы</p>
+                    <p class="sidebar__profile__nav__link__text">Все заказы</p>
                 </router-link>
                 <router-link :to="{name: 'adminCompany'}" class="sidebar__profile__nav__link " v-if="isChief">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
@@ -137,6 +156,7 @@
                     <p class="sidebar__profile__nav__link__text">Партнеры</p>
                 </router-link>
             </div>
+            {{ page }}
             </nav>
         </div>
 </template>
@@ -147,13 +167,14 @@ export default {
         return {
             burgerProfile: {
                 active:false,
-            }
+            },
+            page: null,
         }
     },
     
     computed: {
-        ...mapGetters(["isEmployee", "isChief", "isСustomer", "getUser"]),
-    }
+        ...mapGetters(["isEmployee", "isChief", "isСustomer", "getUser", 'getNotificationActivity']),
+    },
 }
 </script>
 <style lang="">

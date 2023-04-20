@@ -77,6 +77,7 @@
                 <!-- Ошибки ври валидации -->
                 <p v-if="$v.form.phone_number.$dirty && !$v.form.phone_number.required" class="invalid-feedback">Обязательное поле</p> 
                 <p v-if="$v.form.phone_number.$dirty && !$v.form.phone_number.minLength" class="invalid-feedback">Неверно указан номер телефона</p> 
+                <p v-if="$v.form.phone_number.$dirty && !$v.form.phone_number.maxLength" class="invalid-feedback">Неверно указан номер телефона</p> 
                 <!-- === -->
 
                 <label for="date" class="form__label">Дата рождения</label>
@@ -148,7 +149,7 @@ import ToastMessage from '@/components/ToastMessage.vue';
 import { mapActions, mapGetters } from "vuex";
 
 import { validationMixin } from "vuelidate";
-import { required, email, minLength } from 'vuelidate/lib/validators'
+import { required, email, minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
     components: {
         HeaderPages,
@@ -181,7 +182,7 @@ export default {
             second_name: {required, minLength: minLength(2)},
             last_name: {required, minLength: minLength(2)},
             email: {required, email},
-            phone_number: {required, minLength: minLength(12)},
+            phone_number: {required, minLength: minLength(11), maxLength: maxLength(12)},
             date: {required},
             password: {required, minLength: minLength(8)},
             c_password: {required, minLength: minLength(8)},

@@ -23,6 +23,20 @@ export default function(instance) {
         companyAdd(payload) {
             return instance.post('profile/company/add', payload)
         },
+
+        notification() {
+            return instance.get('profile/notification')
+        },
+
+        notifIsRead(payload) {
+            return instance.patch('profile/notification/isRead', payload)
+        },
+
+        notDelete(payload) {
+            return instance.post('profile/notification/delete', payload)
+        },
+
+
     }
   }
   

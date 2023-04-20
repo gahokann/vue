@@ -5,15 +5,22 @@ import router from './router/index'
 import store from './store/index'
 
 import ApiPlugin from './plugins/api'
+import DebugPlugin from './plugins/debug'
 import LoadPlugin from './plugins/load'
 
 
 Vue.use(VueRouter)
 Vue.use(ApiPlugin)
 Vue.use(LoadPlugin)
+Vue.use(DebugPlugin)
+
+// Vue.config.devtools = false
+// Vue.config.productionTip = false
 
 import '@/assets/css/style.css'
 import '@/assets/css/media.css'
+
+// Vue.prototype.$debug = true // Включить дебаггер чтобы показывались ошибки
 
 // const token = localStorage.getItem('user-token')
 // if (token) {
@@ -24,5 +31,5 @@ new Vue({
   render: h => h(App),
   el: '#app',
   router,
-  store
+  store,
 })

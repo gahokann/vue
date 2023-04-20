@@ -27,51 +27,44 @@
             </div>
             <div class="index__profile__orders__info">
                 <div class="index__profile__order__title">
-                    <p>Все заказы</p>
+                    <p>Заказов в работе: {{ getOrdersEmployee.length }}</p>
                 </div>
-                <div class="group__link__table">
-                    <router-link
-                    v-if="isСustomer"
-                        :to="{ name: 'orderCreate' }"
-                        class="btn btn-orange"
+                <a @click="setOrderEmployee()" class="spinner__link">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-arrow-clockwise"
+                        viewBox="0 0 16 16"
                     >
-                        Сделать заказ
-                    </router-link>
-                    <a @click="setOrder()" class="spinner__link">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="bi bi-arrow-clockwise"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
-                            />
-                            <path
-                                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
-                            />
-                        </svg>
-                    </a>
-                </div>
+                        <path
+                            fill-rule="evenodd"
+                            d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+                        />
+                        <path
+                            d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
+                        />
+                    </svg>
+                </a>
             </div>
-            <TableContentContainer :status="getLoadOrder">
+            <TableContentContainer :status="getloadStatusAdmin">
                 <template #content>
-                    <table class="table orderPageTable">
+                    <table class="table orderAllPageTable">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Товар</th>
                                 <th scope="col">Статус заказа</th>
+                                <th scope="col">Пред. дата заказа</th>
                                 <th scope="col">Дата заказа</th>
-                                <th scope="col">Сотрудник</th>
+                                <th scope="col">Заказчик</th>
+                                <th scope="col">Компания</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="order in getOrder" :key="order.id">
+                            <tr v-for="order in getOrdersEmployee" :key="order.id">
                                 <td scope="row" data-label="#">
                                     {{ order.id }}
                                 </td>
@@ -79,16 +72,24 @@
                                 <td data-label="Статус заказа">
                                     {{ order.status_name }}
                                 </td>
-                                <td data-label="Дата заказа">
-                                    {{ order.created_at }}
+                                <td data-label="Пред. дата заказа">
+                                    <p v-if="order.first_deleviryDate != null">
+                                        {{ order.first_deleviryDate }}
+                                    </p>
                                 </td>
-                                <td data-label="Сотрудник">
-                                    <p v-if="order.employee_firstName == null">
-                                        Не назначен
+                                <td data-label="Дата доставки">
+                                    <p v-if="order.last_deleviryDate == null">
+                                        Не назначено
                                     </p>
-                                    <p v-if="order.employee_firstName != null">
-                                        {{ `${order.employee_firstName} ${order.employee_secondName[0]}.${order.employee_lastName[0]}.` }}
+                                    <p v-if="order.last_deleviryDate != null">
+                                        {{ order.last_deleviryDate }}
                                     </p>
+                                </td>
+                                <td data-label="Заказчик">
+                                    {{ `${order.user_firstName} ${order.user_secondName[0]}.${order.user_lastName[0]}.` }}
+                                </td>
+                                <td data-label="Компания">
+                                    {{ order.company.name }}
                                 </td>
                                 <td data-label="">
                                     <router-link
@@ -110,17 +111,25 @@
     </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import TableContentContainer from "@/components/TableContentContainer.vue";
 
 export default {
-    name: "allOrderPage",
     components: {
         TableContentContainer,
     },
-    methods: {...mapActions(['setOrder'])},
+    data() {
+        return {
+        }
+    },
     computed: {
-        ...mapGetters(["getOrder", "getLoadOrder", "isСustomer"]),
+        ...mapGetters(["getOrdersEmployee", "getloadStatusAdmin"]),
+    },
+    methods: {
+        ...mapActions(["setOrderEmployee"]),
+    },
+    created() {
+        this.setOrderEmployee();
     },
 };
 </script>
