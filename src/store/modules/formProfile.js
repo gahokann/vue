@@ -102,6 +102,18 @@ export default (api) => {
                 })
             },
 
+            async updateUserImage({ commit, dispatch }, data) {
+                await api.user.changeImage(data)
+                .then(() => {
+                    dispatch('updateUser');
+                    commit("SET_STATUS", 'Изображение успешно изменено')
+                })
+                .catch(err => {
+                    console.log(err)
+                    commit("SET_STATUS", err.response.data.message)
+                })
+            },
+
             
         },
 

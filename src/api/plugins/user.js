@@ -36,6 +36,18 @@ export default function(instance) {
             return instance.post('profile/notification/delete', payload)
         },
 
+        changeImage(payload) {
+            return instance.post('profile/changeImage', payload)
+        },
+
+        showUser(id) {
+            return instance.get(`admin/userShow/${id}`)
+        },
+
+        showEmployee(id) {
+            return instance.get(`admin/employeeShow/${id}`)
+        }
+
 
     }
   }

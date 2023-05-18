@@ -17,6 +17,7 @@ Vue.use(ApiPlugin)
 Vue.use(LoadPlugin)
 Vue.use(DebugPlugin)
 Vue.use(SearchPlugin)
+Vue.prototype.$url_photo = 'http://localhost:8000/'
 
 // TODO: =======
 

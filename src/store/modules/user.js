@@ -36,6 +36,39 @@ export default (api) => {
                 })
             },
 
+            async showUser({commit}, id) {
+                commit('SET_LOAD_STATUS_USER_SHOW', LoadingStatuses.Loading)
+                await api.user.showUser(id)
+                .then(res => {
+                    if(res.data == null) commit('SET_LOAD_STATUS_USER_SHOW', LoadingStatuses.Empty)
+                    else commit('SET_LOAD_STATUS_USER_SHOW', LoadingStatuses.Ready)
+                    commit('SET_USER_PAGE' ,res.data)
+                }).catch(err => {
+                    commit('SET_HTTPCODE', err.response.status)
+                    commit('SET_ERROR_STATUS', err.response.data.message)
+                    commit('SET_LOAD_STATUS_USER_SHOW', LoadingStatuses.Error)
+                    // router.push({ name: 'profileMain' })
+                })
+            },
+
+            async showEmployee({commit}, id) {
+                commit('SET_LOAD_STATUS_USER_SHOW', LoadingStatuses.Loading)
+                await api.user.showEmployee(id)
+                .then(res => {
+                    if(res.data == null) commit('SET_LOAD_STATUS_USER_SHOW', LoadingStatuses.Empty)
+                    else commit('SET_LOAD_STATUS_USER_SHOW', LoadingStatuses.Ready)
+                    commit('SET_EMPLOYEE_PAGE' ,res.data)
+                }).catch(err => {
+                    commit('SET_HTTPCODE', err.response.status)
+                    commit('SET_ERROR_STATUS', err.response.data.message)
+                    commit('SET_LOAD_STATUS_USER_SHOW', LoadingStatuses.Error)
+                    // router.push({ name: 'profileMain' })
+                })
+            },
+
+
+
+
             // async setNotifications({commit}) {
             //     commit('SET_LOAD_STATUS_USER', LoadingStatuses.Loading)
             //     await api.user.notification()
@@ -110,6 +143,18 @@ export default (api) => {
                 state.loadPageStatus = status
             },
 
+            SET_LOAD_STATUS_USER_SHOW(state, status) {
+                state.loadPageStatusShow = status
+            },
+            
+            SET_USER_PAGE(state, user) {
+                state.showUserPage = user
+            },
+
+            SET_EMPLOYEE_PAGE(state, user) {
+                state.showEmployeePage = user
+            },
+
             // SET_LOAD_NOTIFICATION(state, status) {
             //     state.loadNotificationStatus = status
             // },
@@ -127,6 +172,9 @@ export default (api) => {
             http_code: null,
             error_status: null,
             loadPageStatus: null,
+            loadPageStatusShow: null,
+            showUserPage: null,
+            showEmployeePage: null,
             // loadNotificationStatus: null,
             // notifications: []
         },
@@ -145,6 +193,14 @@ export default (api) => {
                 return state.error_status
             },
 
+            getShowUserPage(state) {
+                return state.showUserPage
+            },
+
+            getShowEmployeePage(state) {
+                return state.showEmployeePage
+            },
+
             // getNotification(state) {
             //     return state.notifications
             // },
@@ -157,6 +213,10 @@ export default (api) => {
 
             getLoadPageStatus(state) {
                 return state.loadPageStatus
+            },
+
+            getLoadPageShow(state) {
+                return state.loadPageStatusShow
             },
             // getLoadNotificationStatus(state) {
             //     return state.loadNotificationStatus

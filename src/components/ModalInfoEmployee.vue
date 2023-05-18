@@ -7,7 +7,7 @@
                     <button @click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body sotr justify-content-start">
-                    <img src="../assets/img/1.jpg" alt="" class="moodal__sotr__img">
+                    <img :src="$url_photo + photo" alt="" class="moodal__sotr__img">
                     <div>
                         <h5 class="modal__sotr__fio">{{ `${firstName} ${secondName} ${lastName}` }}</h5>
                         <p class="modal__sotr__role">{{ roleName }}</p>
@@ -46,6 +46,9 @@ export default {
             type: String,
         },
         phone: {
+            type: String,
+        },
+        photo: {
             type: String,
         }
     }

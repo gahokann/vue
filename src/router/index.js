@@ -16,8 +16,8 @@ import AdminEmployee from '../pages/admin/EmployeePage.vue'
 import AdminOrder from '../pages/admin/AllOrderPage.vue'
 import AdminCompany from '../pages/admin/CopmanyPage.vue'
 import AdminPartner from '../pages/admin/PartnerPage.vue'
-import AdminPerson from '../pages/admin/EmployeePersonPage.vue'
-import AdminClientPerson from '../pages/admin/ClientPersonPage.vue'
+import AdminPerson from '../pages/admin/EmployeePersonPage.vue' //Админ
+import AdminClientPerson from '../pages/admin/ClientPersonPage.vue' // Пользоавтель
 import AdminJobOrderPage from '../pages/admin/JobOrderPage.vue'
 import Notifications from '../pages/profile/NotificationsPage.vue'
 import NotFound from '../pages/layouts/NotFound.vue'
@@ -184,19 +184,7 @@ export default new VueRouter ({
                     component: AdminPartner,
                 },
                 {
-                    path: '/admin/person',
-                    name: 'adminPerson',
-                    beforeEnter: (to, from, next) => {
-                        if(store.getters.isChief) {
-                            next()
-                        } else {
-                            next({name: 'profileMain'})
-                        }
-                    },
-                    component: AdminPerson,
-                },
-                {
-                    path: '/admin/personClient',
+                    path: '/admin/personClient/:id',
                     name: 'adminClientPerson',
                     beforeEnter: (to, from, next) => {
                         if(store.getters.isChief) {
@@ -206,6 +194,18 @@ export default new VueRouter ({
                         }
                     },
                     component: AdminClientPerson,
+                },
+                {
+                    path: '/admin/person/:id',
+                    name: 'adminPerson',
+                    beforeEnter: (to, from, next) => {
+                        if(store.getters.isChief) {
+                            next()
+                        } else {
+                            next({name: 'profileMain'})
+                        }
+                    },
+                    component: AdminPerson,
                 },
                 {
                     path: 'admin/jobOrderPage',

@@ -35,7 +35,7 @@
                             </svg>
                             </button>
                             <PreloaderLine 
-                            v-if="getloadStatusAdmin == 'LOADING' || getLoadOrder == 'LOADING'"
+                            v-if="getloadStatusAdmin == 'LOADING' || getLoadOrder == 'LOADING' || getLoadPageShow == 'LOADING'"
                             >
                             </PreloaderLine>
                         </div>
@@ -70,7 +70,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["getUser", "getLoadPageStatus", "getloadStatusAdmin", "getLoadOrder"]),
+        ...mapGetters(["getUser", "getLoadPageStatus", "getloadStatusAdmin", "getLoadOrder", "getLoadPageShow"]),
     },
 
     methods: {

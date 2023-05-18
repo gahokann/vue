@@ -94,7 +94,8 @@
                                 <td v-else data-label="Выдача доступа">Доступ запрещён</td>
                                 <td data-label="">
                                     <router-link
-                                        :to="{ name: 'adminClientPerson' }"
+                                        :to="{ name: 'adminPerson',
+                                        params: { id: user.id }, }"
                                         class="btn btn-orange"
                                         >Открыть</router-link
                                     >

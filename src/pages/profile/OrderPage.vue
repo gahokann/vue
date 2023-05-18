@@ -87,7 +87,9 @@
                                             (isModalInfoEmployeeOpen.active =
                                                 !isModalInfoEmployeeOpen.active)
                                     "
-                                    src="../../assets/img/1.jpg"
+                                    :src="
+                                        $url_photo + getOrderUser.employee.photo
+                                    "
                                     alt=""
                                     class="info__item__img"
                                 />
@@ -121,7 +123,7 @@
                             class="order__block__info"
                             v-if="orderBlock.mainActive"
                         >
-                            <p class="order__block__info__column">
+                            <!-- <p class="order__block__info__column">
                                 Заказчик:
                                 {{
                                     `${getOrderUser.user_firstName} ${getOrderUser.user_secondName} ${getOrderUser.user_lastName}`
@@ -135,22 +137,136 @@
                                 Предварительная дата доставки:
                                 {{ getOrderUser.first_deleviryDate }}
                             </p>
-                            <p class="order__block__info__date">
+                            <p v-if="getOrderUser.last_deleviryDate != null" class="order__block__info__date">
                                 Дата доставки:
                                 {{ getOrderUser.last_deleviryDate }}
                             </p>
-                            <p class="order__block__info__description">
+                            <p v-if="getOrderUser.information != null" class="order__block__info__description">
+                                Информация: 
                                 {{ getOrderUser.information }}
                             </p>
                             <p class="order__block__info__img">
-                                Картинка: Отсутствует
-                            </p>
+                                <img :src="$url_photo + getOrderUser.photo" alt="" v-if="getOrderUser.photo != null">
+                            </p> -->
+                            <div
+                                class="d-flex align-items-center mt-3"
+                                style="column-gap: 25px"
+                            >
+                                <img
+                                    :src="$url_photo + getOrderUser.user_photo"
+                                    alt=""
+                                    class="info__item__img"
+                                />
+                                <div class="sotr">
+                                    <h4 class="info__item__sotr">Заказчик</h4>
+                                    <div class="info__item__fio">
+                                        <p>
+                                            {{
+                                                `${getOrderUser.user_firstName} ${getOrderUser.user_secondName} ${getOrderUser.user_lastName}`
+                                            }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order__block__info__info">
+                                <p class="order__block__info__info__date">
+                                    Желаемая дата отгрузки:
+                                    {{ getOrderUser.first_deleviryDate }}
+                                </p>
+                                <div>
+                                    <p
+                                        v-if="
+                                            getOrderUser.last_deleviryDate !=
+                                            null
+                                        "
+                                        class="order__block__info__info__datelast"
+                                    >
+                                        Дата отгрузки:
+                                        {{ getOrderUser.last_deleviryDate }}
+                                    </p>
+                                    <p
+                                        v-else
+                                        class="order__block__info__info__datelast"
+                                    >
+                                        Дата отгрузки: Не назначена
+                                    </p>
+                                </div>
+                                <p class="order__block__info__info__quantity">
+                                    Количество товара:
+                                    {{ getOrderUser.quantity }}
+                                </p>
+                                <p class="order__block__info__info__status">
+                                    Статус заказа:
+                                    {{ getOrderUser.status_name }}
+                                </p>
+                                <div>
+                                    <p
+                                        class="order__block__info__info__in"
+                                        v-if="getOrderUser.information != null"
+                                    >
+                                        Информация:
+                                        {{ getOrderUser.information }}
+                                    </p>
+                                    <p
+                                        class="order__block__info__info__in"
+                                        v-else
+                                    >
+                                        Информация: отсутствует
+                                    </p>
+                                </div>
+                                <div
+                                    v-if="getOrderUser.photo != null"
+                                    class="d-flex justify-content-center"
+                                >
+                                    <img
+                                        :src="$url_photo + getOrderUser.photo"
+                                        alt=""
+                                        class="order_block__info__info__img"
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div
                             class="order__block__info"
                             v-if="orderBlock.messageActive"
                         >
-                            Сообщения
+                        
+                        <div class="content__recipe__item comment mt-5">
+    <div class="card-footer card__pos py-3 border-0">
+        <div class="d-flex flex-start w-100">
+            <img class="rounded-circle shadow-1-strong me-3 navbar__logo" :src="$url_photo + getUser.photo" alt="avatar" width="40"
+                height="40" />
+            <div class="form-outline w-100 textarea-block__comment">
+                <textarea name="text" class="form-control comment__textarea" id="textAreaExample" placeholder="Введите коммантарий"
+                    rows="4" style="background: #fff;"></textarea>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn btn-primary btn-comment">Ответить</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="float-end mt-2 pt-1">
+        </div>
+
+    </div>
+    <div class="card" v-for="message in getOrderUser.messages" :key="message.id" style="margin-bottom: 15px">
+        <div class="card-body">
+            <div class="d-flex flex-start justify-content-between align-items-center">
+                <div style="align-items: center" class="d-flex aling-items-center">
+                    <img class="rounded-circle shadow-1-strong me-3 navbar__logo" :src="$url_photo + message.user.photo" alt="avatar" />
+                    <div>
+                        <h6 class="fw-bold mb-1" style="color: #F88C21">{{ `${message.user.first_name} ${message.user.second_name[0]}.${message.user.last_name[0]}`}}</h6>
+                        <p class="text-muted small mb-0"> 2020-01-01</p>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-3 pb-2"> {{ message.text }} </p>
+        </div>
+    </div>
+
+</div>
+
                         </div>
                         <div
                             class="order__block__info"
@@ -197,20 +313,26 @@
                             </div>
                             <div class="order__block__admin__block second">
                                 <p class="admin__block__title">
-                                    Изменение статуса заказа. 
+                                    Изменение статуса заказа.
                                 </p>
                                 <p class="admin__block__title status">
-                                    Статус заказа: 
+                                    Статус заказа:
                                     {{ getOrderUser.status_name }}
                                 </p>
-                                <select @change="onChange($event, getOrderUser.id)" class="form-select admin__select__block" >
-                                        <option selected>Выберите статус для заказа</option>
-                                        <option 
-                                        v-for="status in getOrderUser.statuses" :key="status.id" :value="status.id"
-                                        
-                                        >
-                                            {{ status.name }}
-                                        </option>
+                                <select
+                                    @change="onChange($event, getOrderUser.id)"
+                                    class="form-select admin__select__block"
+                                >
+                                    <option selected>
+                                        Выберите статус для заказа
+                                    </option>
+                                    <option
+                                        v-for="status in getOrderUser.statuses"
+                                        :key="status.id"
+                                        :value="status.id"
+                                    >
+                                        {{ status.name }}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -236,6 +358,7 @@
                 :roleName="person.role"
                 :email="person.email"
                 :phone="person.phone"
+                :photo="person.photo"
             ></ModalInfoEmployee>
 
             <ModalInfoCompany
@@ -316,6 +439,7 @@ export default {
         ...mapGetters([
             "getOrderUser",
             "getLoadOrder",
+            "getUser",
             "getStatus",
             "isEmployee",
             "getUser",
@@ -323,7 +447,12 @@ export default {
         ]),
     },
     methods: {
-        ...mapActions(["setOrderUser", "orderWorkChange", "orderWorkRemove", 'changeOrderStatus']),
+        ...mapActions([
+            "setOrderUser",
+            "orderWorkChange",
+            "orderWorkRemove",
+            "changeOrderStatus",
+        ]),
 
         navOrder(nav) {
             if (nav == "mainActive") {
@@ -373,11 +502,11 @@ export default {
         },
 
         onChange(event, orderID) {
-            let value = event.target.value
+            let value = event.target.value;
             this.changeOrderStatus({
                 orderID: orderID,
-                status: value
-            })
+                status: value,
+            });
             setTimeout(() => {
                 this.isToasts.active = true;
             }, 1500);

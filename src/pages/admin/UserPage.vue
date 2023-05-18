@@ -90,7 +90,8 @@
                                 </td>
                                 <td data-label="">
                                     <router-link
-                                        :to="{ name: 'adminClientPerson' }"
+                                        :to="{ name: 'adminClientPerson',
+                                        params: { id: user.id }, }"
                                         class="btn btn-orange"
                                         >Открыть</router-link
                                     >
